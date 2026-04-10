@@ -1,1376 +1,1912 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<!doctype html >
+<!--[if IE 8]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en-US"> <!--<![endif]-->
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Outcube — Spatial Intelligence Studio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --ink: #0a0a0f;
-    --sand: #f0ece3;
-    --gold: #c9a84c;
-    --gold-dim: #c9a84c44;
-    --gold-glow: #c9a84c22;
-    --mist: #ffffff12;
-    --mist2: #ffffff08;
-    --text: #e8e4da;
-    --text-dim: #9a9488;
-    --text-dimmer: #5a5650;
-    --border: #ffffff14;
-    --border-gold: #c9a84c30;
-    --accent: #1a3a2a;
-    --teal: #4ecdc4;
-  }
 
-  html { scroll-behavior: smooth; }
 
-  body {
-    background: var(--ink);
-    color: var(--text);
-    font-family: 'Syne', sans-serif;
-    overflow-x: hidden;
-    cursor: none;
-  }
 
-  /* Custom cursor */
-  .cursor {
-    width: 8px; height: 8px;
-    background: var(--gold);
-    border-radius: 50%;
-    position: fixed;
-    top: 0; left: 0;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background 0.2s;
-    mix-blend-mode: difference;
-  }
-  .cursor-ring {
-    width: 32px; height: 32px;
-    border: 1px solid var(--gold);
-    border-radius: 50%;
-    position: fixed;
-    top: 0; left: 0;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: all 0.12s ease;
-    opacity: 0.6;
-  }
+ <script type="text/javascript"> 
+ 
+    if (screen.width <= 480) {
+		
+			if (window.location.href === "https://www.raialyoum.com/")
+				window.location = "https://www.raialyoum.com/mobile";
+	
+			if (window.location.href === "https://raialyoum.com/")
+				window.location = "https://raialyoum.com/mobile";
+	}
+	
 
-  /* Grid background */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 80px 80px;
-    pointer-events: none;
-    z-index: 0;
-  }
+	
+</script>  
 
-  /* Ambient orbs */
-  .orb {
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    filter: blur(120px);
-    z-index: 0;
-  }
-  .orb-1 {
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, #c9a84c15 0%, transparent 70%);
-    top: -200px; right: -200px;
-    animation: drift1 20s ease-in-out infinite;
-  }
-  .orb-2 {
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, #4ecdc415 0%, transparent 70%);
-    bottom: 20%; left: -150px;
-    animation: drift2 25s ease-in-out infinite;
-  }
-  @keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,60px)} }
-  @keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(60px,-40px)} }
 
-  /* Nav */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 24px 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--border);
-    background: linear-gradient(180deg, #0a0a0fdd 0%, transparent 100%);
-    backdrop-filter: blur(12px);
-  }
+<!-- The next two scripts are to prevent the message appearing at the bottom about Adblockers -->
 
-  .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 300;
-    letter-spacing: 0.12em;
-    color: var(--sand);
-  }
-  .logo span { color: var(--gold); }
+<script async src="https://fundingchoicesmessages.google.com/i/pub-7999499108792198?ers=1">
+</script>
 
-  .nav-links {
-    display: flex;
-    gap: 40px;
-    list-style: none;
-  }
-  .nav-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  .nav-links a:hover { color: var(--gold); }
+<script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();
+</script>
 
-  .nav-cta {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--ink);
-    background: var(--gold);
-    padding: 10px 24px;
-    border: none;
-    cursor: none;
-    transition: opacity 0.3s;
-    text-decoration: none;
-  }
-  .nav-cta:hover { opacity: 0.85; }
 
-  /* Hero */
-  .hero {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 120px 60px 80px;
-    overflow: hidden;
-  }
 
-  .hero-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 32px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.2s forwards;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    width: 40px; height: 1px;
-    background: var(--gold);
-  }
+<!-- Taha header code -->
 
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(60px, 8vw, 120px);
-    font-weight: 300;
-    line-height: 0.92;
-    letter-spacing: -0.02em;
-    max-width: 900px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.4s forwards;
-  }
-  .hero-title em {
-    font-style: italic;
-    color: var(--gold);
-  }
 
-  .hero-sub {
-    margin-top: 48px;
-    max-width: 560px;
-    font-size: 17px;
-    line-height: 1.7;
-    color: var(--text-dim);
-    font-weight: 400;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.6s forwards;
-  }
 
-  .hero-actions {
-    margin-top: 56px;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.8s forwards;
-  }
+<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+</script>
+<script src='https://raialyoumcdn.azureedge.net/racontainer/header2.js'></script>
 
-  .btn-primary {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--ink);
-    background: var(--gold);
-    padding: 16px 40px;
-    border: none;
-    cursor: none;
-    text-decoration: none;
-    transition: all 0.3s;
-    display: inline-block;
-  }
-  .btn-primary:hover { background: var(--sand); }
 
-  .btn-secondary {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    background: transparent;
-    padding: 16px 40px;
-    border: 1px solid var(--border);
-    cursor: none;
-    text-decoration: none;
-    transition: all 0.3s;
-    display: inline-block;
-  }
-  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+<!-- End Taha header code -->
 
-  /* Floating data cards in hero */
-  .hero-visual {
-    position: absolute;
-    right: 60px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 400px;
-    opacity: 0;
-    animation: fadeIn 1s 1s forwards;
-  }
 
-  .data-card {
-    background: var(--mist);
-    border: 1px solid var(--border);
-    padding: 20px 24px;
-    margin-bottom: 12px;
-    position: relative;
-    backdrop-filter: blur(8px);
-  }
-  .data-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 2px;
-    background: var(--gold);
-  }
-  .data-card-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dimmer);
-    margin-bottom: 8px;
-  }
-  .data-card-value {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 300;
-    color: var(--sand);
-    line-height: 1;
-  }
-  .data-card-unit {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--text-dim);
-    margin-top: 4px;
-  }
-  .data-card-pulse {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 8px; height: 8px;
-    background: var(--teal);
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%,100%{opacity:1;box-shadow:0 0 0 0 #4ecdc444}
-    50%{opacity:0.6;box-shadow:0 0 0 8px transparent}
-  }
 
-  .coord-display {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: var(--text-dimmer);
-    margin-top: 20px;
-    letter-spacing: 0.1em;
-    border-top: 1px solid var(--border);
-    padding-top: 16px;
-  }
+<script data-ad-client="ca-pub-7999499108792198" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
-  /* Scroll indicator */
-  .scroll-hint {
-    position: absolute;
-    bottom: 40px;
-    left: 60px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    opacity: 0;
-    animation: fadeIn 1s 1.5s forwards;
-  }
-  .scroll-line {
-    width: 1px;
-    height: 60px;
-    background: linear-gradient(180deg, var(--gold) 0%, transparent 100%);
-    animation: scrollLine 2s ease-in-out infinite;
-  }
-  @keyframes scrollLine { 0%,100%{opacity:1} 50%{opacity:0.3} }
-  .scroll-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dimmer);
-    writing-mode: vertical-rl;
-  }
 
-  @keyframes fadeUp {
-    from { opacity:0; transform: translateY(30px); }
-    to { opacity:1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity:0; }
-    to { opacity:1; }
-  }
 
-  /* Statement band */
-  .statement-band {
-    position: relative;
-    z-index: 1;
-    padding: 80px 60px;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    background: var(--mist2);
-    overflow: hidden;
-  }
-  .statement-band::before {
-    content: 'OUTCUBE';
-    position: absolute;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 180px;
-    font-weight: 600;
-    color: var(--gold-glow);
-    right: -20px;
-    top: 50%;
-    transform: translateY(-50%);
-    letter-spacing: -0.05em;
-    pointer-events: none;
-  }
-  .statement-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(28px, 3.5vw, 48px);
-    font-weight: 300;
-    line-height: 1.4;
-    max-width: 720px;
-    color: var(--sand);
-  }
-  .statement-text em { font-style: italic; color: var(--gold); }
 
-  /* Problem section */
-  .section {
-    position: relative;
-    z-index: 1;
-    padding: 120px 60px;
-  }
 
-  .section-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 60px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .section-tag::after {
-    content: '';
-    flex: 1;
-    max-width: 80px;
-    height: 1px;
-    background: var(--border-gold);
-  }
 
-  .problem-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
+<!-- publift.com header code -->
 
-  .problem-item {
-    background: var(--ink);
-    padding: 48px 40px;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.4s;
-  }
-  .problem-item:hover { background: var(--mist2); }
-  .problem-item::before {
-    content: attr(data-num);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 80px;
-    font-weight: 600;
-    color: var(--gold-glow);
-    position: absolute;
-    top: 20px; right: 30px;
-    line-height: 1;
-  }
+<!--
+<script async src="https://cdn.fuseplatform.net/publift/tags/2/2167/fuse.js"></script>
 
-  .problem-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--sand);
-    margin-bottom: 16px;
-    letter-spacing: 0.02em;
-  }
-  .problem-body {
-    font-size: 15px;
-    line-height: 1.7;
-    color: var(--text-dim);
-  }
+-->
+<!-- end publift -->
 
-  /* Solution */
-  .solution-section {
-    position: relative;
-    z-index: 1;
-    padding: 120px 60px;
-    background: linear-gradient(135deg, #0f1a14 0%, var(--ink) 60%);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
 
-  .solution-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-    margin-bottom: 80px;
-  }
 
-  .solution-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(40px, 5vw, 72px);
-    font-weight: 300;
-    line-height: 1.05;
-    color: var(--sand);
-  }
-  .solution-title em { font-style: italic; color: var(--gold); }
+<!--optad360.com Header Tags-->
 
-  .solution-desc {
-    font-size: 16px;
-    line-height: 1.8;
-    color: var(--text-dim);
-    padding-top: 16px;
-  }
+<!--
+<script async src="//cmp.optad360.io/items/0637ffbd-2d4e-430d-85d1-cec84a278311.min.js"></script>
+<script async src="//get.optad360.io/sf/62b1f5e5-c72e-4755-aff3-a5f306cc80aa/plugin.min.js"></script>
+-->
 
-  .pipeline {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--border-gold);
-    border: 1px solid var(--border-gold);
-    margin-top: 60px;
-  }
+<!--End optad360.com Header Tags-->
 
-  .pipeline-step {
-    background: var(--ink);
-    padding: 40px 32px;
-    position: relative;
-    transition: background 0.3s;
-  }
-  .pipeline-step:hover { background: #0f1a14; }
+<!-- adeqmedia Header Tags-->
 
-  .step-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--gold);
-    margin-bottom: 20px;
-    display: block;
-  }
-  .step-icon {
-    font-size: 24px;
-    margin-bottom: 16px;
-    display: block;
-  }
-  .step-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: var(--sand);
-    margin-bottom: 12px;
-    text-transform: uppercase;
-  }
-  .step-detail {
-    font-size: 13px;
-    line-height: 1.6;
-    color: var(--text-dimmer);
-  }
-  .step-tool {
-    margin-top: 16px;
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: var(--gold);
-    letter-spacing: 0.1em;
-  }
+<script async src="https://scripts.adeqmedia.com/master.js" data-id="472"></script>
 
-  /* Differentiators */
-  .diff-section {
-    position: relative;
-    z-index: 1;
-    padding: 120px 60px;
-  }
+<script type="text/javascript" src="https://cdn.reportmyads.com/5d6212189ee4369849fa51acd2458251--2151/master-tag.js"></script>
 
-  .diff-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-top: 60px;
-  }
+<script type="text/javascript">
+window._taboola = window._taboola || [];
+_taboola.push({article:'auto'});
+!function (e, f, u, i) {
+if (!document.getElementById(i)){
+e.async = 1;
+e.src = u;
+e.id = i;
+f.parentNode.insertBefore(e, f);
+}
+}(document.createElement('script'),
+document.getElementsByTagName('script')[0],
+'//cdn.taboola.com/libtrc/adeqnewnetwork/loader.js',
+'tb_loader_script');
+if(window.performance && typeof window.performance.mark == 'function')
+{window.performance.mark('tbl_ic');}
+</script>
 
-  .diff-card {
-    border: 1px solid var(--border);
-    padding: 40px 32px;
-    position: relative;
-    transition: all 0.4s;
-    overflow: hidden;
-  }
-  .diff-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s;
-  }
-  .diff-card:hover::after { transform: scaleX(1); }
-  .diff-card:hover { border-color: var(--border-gold); background: var(--mist2); }
 
-  .diff-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 64px;
-    font-weight: 300;
-    color: var(--gold);
-    line-height: 1;
-    opacity: 0.3;
-    margin-bottom: 24px;
-    display: block;
-  }
-  .diff-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--sand);
-    margin-bottom: 12px;
-    letter-spacing: 0.03em;
-  }
-  .diff-text {
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--text-dim);
-  }
+<!--End of adeqmedia Header Tags-->
 
-  /* Markets */
-  .markets-section {
-    position: relative;
-    z-index: 1;
-    padding: 120px 60px;
-    background: var(--mist2);
-    border-top: 1px solid var(--border);
-  }
+    <title>هل سيذهب الوفد الإيراني الى &#8220;اسلام اباد&#8221; للقاء نظيره الأمريكي بعد مجزرة لبنان؟ ولماذا أقدم نتنياهو عليها بعد ساعات من وقف اطلاق النار؟ وكيف جاء رد &#8220;حزب الله&#8221; الصاروخي السريع صادما لإسرائيل وامريكا معا؟ | رأي اليوم</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="pingback" href="https://www.raialyoum.com/xmlrpc.php" />
+    <meta name='robots' content='max-image-preview:large' />
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	<meta property="og:image" content="https://www.raialyoum.com/wp-content/uploads/2026/04/2026-04-09_15-29-47_157043.jpg" /><link rel="icon" type="image/png" href="/images/logo.jpg"><!-- Jetpack Site Verification Tags -->
+<meta name="google-site-verification" content="emDnwl2z5Z8eNt8qaNAmHqDI8SZZQPGhmr4wX91nZQ4" />
+<link rel='dns-prefetch' href='//stats.wp.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//v0.wordpress.com' />
+<link rel="alternate" type="application/rss+xml" title="رأي اليوم &raquo; Feed" href="https://www.raialyoum.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="رأي اليوم &raquo; Comments Feed" href="https://www.raialyoum.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="رأي اليوم &raquo; هل سيذهب الوفد الإيراني الى &#8220;اسلام اباد&#8221; للقاء نظيره الأمريكي بعد مجزرة لبنان؟ ولماذا أقدم نتنياهو عليها بعد ساعات من وقف اطلاق النار؟ وكيف جاء رد &#8220;حزب الله&#8221; الصاروخي السريع صادما لإسرائيل وامريكا معا؟ Comments Feed" href="https://www.raialyoum.com/%d9%87%d9%84-%d8%b3%d9%8a%d8%b0%d9%87%d8%a8-%d8%a7%d9%84%d9%88%d9%81%d8%af-%d8%a7%d9%84%d8%a5%d9%8a%d8%b1%d8%a7%d9%86%d9%8a-%d8%a7%d9%84%d9%89-%d8%a7%d8%b3%d9%84%d8%a7%d9%85-%d8%a7%d8%a8%d8%a7%d8%af/feed/" />
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.raialyoum.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.8.3"}};
+/*! This file is auto-generated */
+!function(s,n){var o,i,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),a=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===a[t]})}function u(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);for(var n=e.getImageData(16,16,1,1),a=0;a<n.data.length;a++)if(0!==n.data[a])return!1;return!0}function f(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\udedf")}return!1}function g(e,t,n,a){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):s.createElement("canvas"),o=r.getContext("2d",{willReadFrequently:!0}),i=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(function(e){i[e]=t(o,e,n,a)}),i}function t(e){var t=s.createElement("script");t.src=e,t.defer=!0,s.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",i=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){s.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+g.toString()+"("+[JSON.stringify(i),f.toString(),p.toString(),u.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"}),r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=function(e){c(n=e.data),r.terminate(),t(n)})}catch(e){}c(n=g(i,f,p,u))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<!-- managing ads with Advanced Ads – https://wpadvancedads.com/ --><script data-wpfc-render="false">
+					advanced_ads_ready=function(){var fns=[],listener,doc=typeof document==="object"&&document,hack=doc&&doc.documentElement.doScroll,domContentLoaded="DOMContentLoaded",loaded=doc&&(hack?/^loaded|^c/:/^loaded|^i|^c/).test(doc.readyState);if(!loaded&&doc){listener=function(){doc.removeEventListener(domContentLoaded,listener);window.removeEventListener("load",listener);loaded=1;while(listener=fns.shift())listener()};doc.addEventListener(domContentLoaded,listener);window.addEventListener("load",listener)}return function(fn){loaded?setTimeout(fn,0):fns.push(fn)}}();
+			</script><link rel='stylesheet' id='cps_css_style-css' href='https://www.raialyoum.com/wp-content/plugins/category-post-slider/css/cps-style.css?ver=1.3' type='text/css' media='all' />
+<link rel='stylesheet' id='cnss_font_awesome_css-css' href='https://www.raialyoum.com/wp-content/plugins/easy-social-icons/css/font-awesome/css/all.min.css?ver=5.7.2' type='text/css' media='all' />
+<link rel='stylesheet' id='cnss_font_awesome_v4_shims-css' href='https://www.raialyoum.com/wp-content/plugins/easy-social-icons/css/font-awesome/css/v4-shims.min.css?ver=5.7.2' type='text/css' media='all' />
+<link rel='stylesheet' id='cnss_css-css' href='https://www.raialyoum.com/wp-content/plugins/easy-social-icons/css/cnss.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='dashicons-css' href='https://www.raialyoum.com/wp-includes/css/dashicons.min.css?ver=6.8.3' type='text/css' media='all' />
+<link rel='stylesheet' id='post-views-counter-frontend-css' href='https://www.raialyoum.com/wp-content/plugins/post-views-counter/css/frontend.min.css?ver=1.5.7' type='text/css' media='all' />
+<style id='wp-emoji-styles-inline-css' type='text/css'>
 
-  .markets-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    margin-top: 60px;
-  }
-
-  .market-card {
-    background: var(--ink);
-    padding: 48px 40px;
-    transition: background 0.4s;
-  }
-  .market-card:hover { background: #0d1410; }
-
-  .market-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: 20px;
-    display: block;
-  }
-  .market-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 32px;
-    font-weight: 300;
-    color: var(--sand);
-    margin-bottom: 16px;
-    line-height: 1.2;
-  }
-  .market-desc {
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--text-dim);
-    margin-bottom: 24px;
-  }
-  .market-price {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--gold);
-    letter-spacing: 0.1em;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-  }
-
-  /* Why no drone */
-  .nodrone-section {
-    position: relative;
-    z-index: 1;
-    padding: 120px 60px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    border-top: 1px solid var(--border);
-  }
-
-  .comparison-table {
-    border: 1px solid var(--border);
-    overflow: hidden;
-  }
-  .ct-header {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
-    background: var(--mist);
-    border-bottom: 1px solid var(--border);
-  }
-  .ct-col {
-    padding: 16px 20px;
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-  .ct-col.them { color: var(--text-dimmer); }
-  .ct-col.us { color: var(--gold); }
-
-  .ct-row {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
-    border-bottom: 1px solid var(--border);
-    transition: background 0.2s;
-  }
-  .ct-row:last-child { border-bottom: none; }
-  .ct-row:hover { background: var(--mist2); }
-
-  .ct-cell {
-    padding: 16px 20px;
-    font-size: 13px;
-    border-right: 1px solid var(--border);
-  }
-  .ct-cell:last-child { border-right: none; }
-  .ct-cell.label { color: var(--text-dim); }
-  .ct-cell.bad { color: var(--text-dimmer); }
-  .ct-cell.good { color: var(--teal); font-weight: 500; }
-
-  /* Pricing */
-  .pricing-section {
-    position: relative;
-    z-index: 1;
-    padding: 120px 60px;
-    background: linear-gradient(135deg, #0f1a14 0%, var(--ink) 100%);
-    border-top: 1px solid var(--border);
-  }
-
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border-gold);
-    border: 1px solid var(--border-gold);
-    margin-top: 60px;
-  }
-
-  .price-tier {
-    background: var(--ink);
-    padding: 48px 36px;
-    position: relative;
-  }
-  .price-tier.featured {
-    background: #0f1a14;
-  }
-  .price-tier.featured::before {
-    content: 'MOST POPULAR';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    text-align: center;
-    padding: 8px;
-    background: var(--gold);
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    color: var(--ink);
-  }
-
-  .tier-name {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 16px;
-    margin-top: 8px;
-  }
-  .tier-price {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 52px;
-    font-weight: 300;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .tier-currency {
-    font-size: 20px;
-    vertical-align: super;
-  }
-  .tier-period {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--text-dimmer);
-    margin-bottom: 32px;
-  }
-  .tier-features {
-    list-style: none;
-    margin-bottom: 36px;
-  }
-  .tier-features li {
-    font-size: 13px;
-    color: var(--text-dim);
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    line-height: 1.4;
-  }
-  .tier-features li::before {
-    content: '→';
-    color: var(--gold);
-    flex-shrink: 0;
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    margin-top: 1px;
-  }
-
-  /* CTA */
-  .cta-section {
-    position: relative;
-    z-index: 1;
-    padding: 160px 60px;
-    text-align: center;
-    border-top: 1px solid var(--border);
-    overflow: hidden;
-  }
-  .cta-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at center, var(--gold-glow) 0%, transparent 60%);
-    pointer-events: none;
-  }
-
-  .cta-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(48px, 7vw, 100px);
-    font-weight: 300;
-    line-height: 0.95;
-    color: var(--sand);
-    margin-bottom: 32px;
-  }
-  .cta-title em { font-style: italic; color: var(--gold); }
-
-  .cta-sub {
-    font-size: 17px;
-    color: var(--text-dim);
-    margin-bottom: 56px;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.7;
-  }
-
-  .cta-actions {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-
-  /* Contact strip */
-  .contact-strip {
-    position: relative;
-    z-index: 1;
-    padding: 32px 60px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .contact-mono {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--text-dimmer);
-    letter-spacing: 0.1em;
-  }
-  .contact-mono a { color: var(--gold); text-decoration: none; }
-
-  /* Footer */
-  footer {
-    position: relative;
-    z-index: 1;
-    padding: 40px 60px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    color: var(--text-dimmer);
-  }
-  .footer-logo span { color: var(--gold); }
-  .footer-copy {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: var(--text-dimmer);
-    letter-spacing: 0.1em;
-  }
-  .footer-links {
-    display: flex;
-    gap: 32px;
-    list-style: none;
-  }
-  .footer-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: var(--text-dimmer);
-    text-decoration: none;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: color 0.3s;
-  }
-  .footer-links a:hover { color: var(--gold); }
-
-  /* Reveal animation */
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Scrolling ticker */
-  .ticker {
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    overflow: hidden;
-    padding: 16px 0;
-    background: var(--mist2);
-    position: relative;
-    z-index: 1;
-  }
-  .ticker-track {
-    display: flex;
-    animation: tick 30s linear infinite;
-    width: max-content;
-  }
-  .ticker-item {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dimmer);
-    padding: 0 40px;
-    white-space: nowrap;
-  }
-  .ticker-item span { color: var(--gold); margin-right: 10px; }
-  @keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-  @media (max-width: 900px) {
-    nav { padding: 20px 24px; }
-    .nav-links { display: none; }
-    .hero { padding: 100px 24px 60px; }
-    .hero-visual { display: none; }
-    .section, .solution-section, .diff-section, .markets-section, .pricing-section { padding: 80px 24px; }
-    .problem-grid, .markets-grid { grid-template-columns: 1fr; }
-    .diff-grid, .pricing-grid, .pipeline { grid-template-columns: 1fr; }
-    .solution-header, .nodrone-section { grid-template-columns: 1fr; gap: 40px; }
-    .cta-section { padding: 100px 24px; }
-    .contact-strip, footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px; }
-    .statement-band { padding: 60px 24px; }
-    .statement-band::before { font-size: 80px; }
-  }
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
 </style>
-</head>
-<body>
+<link rel='stylesheet' id='wp-block-library-css' href='https://www.raialyoum.com/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<link rel='stylesheet' id='mediaelement-css' href='https://www.raialyoum.com/wp-includes/js/mediaelement/mediaelementplayer-legacy.min.css?ver=4.2.17' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-mediaelement-css' href='https://www.raialyoum.com/wp-includes/js/mediaelement/wp-mediaelement.min.css?ver=6.8.3' type='text/css' media='all' />
+<style id='jetpack-sharing-buttons-style-inline-css' type='text/css'>
+.jetpack-sharing-buttons__services-list{display:flex;flex-direction:row;flex-wrap:wrap;gap:0;list-style-type:none;margin:5px;padding:0}.jetpack-sharing-buttons__services-list.has-small-icon-size{font-size:12px}.jetpack-sharing-buttons__services-list.has-normal-icon-size{font-size:16px}.jetpack-sharing-buttons__services-list.has-large-icon-size{font-size:24px}.jetpack-sharing-buttons__services-list.has-huge-icon-size{font-size:36px}@media print{.jetpack-sharing-buttons__services-list{display:none!important}}.editor-styles-wrapper .wp-block-jetpack-sharing-buttons{gap:0;padding-inline-start:0}ul.jetpack-sharing-buttons__services-list.has-background{padding:1.25em 2.375em}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='announcer-css-css' href='https://www.raialyoum.com/wp-content/plugins/announcer/public/css/style.css?ver=6.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wa_chpcs_css_file-css' href='https://www.raialyoum.com/wp-content/plugins/carousel-horizontal-posts-content-slider/assets/css/custom-style.css?ver=3.3' type='text/css' media='all' />
+<link rel='stylesheet' id='wpa-css-css' href='https://www.raialyoum.com/wp-content/plugins/honeypot/includes/css/wpa.css?ver=2.0.1' type='text/css' media='all' />
+<link rel='stylesheet' id='solr_auto_css-css' href='https://www.raialyoum.com/wp-content/plugins/wpsolr-search-engine/wpsolr/core/css/bootstrap.min.css?ver=19.9' type='text/css' media='all' />
+<link rel='stylesheet' id='solr_frontend-css' href='https://www.raialyoum.com/wp-content/plugins/wpsolr-search-engine/wpsolr/core/css/style.css?ver=19.9' type='text/css' media='all' />
+<link rel='stylesheet' id='google-fonts-style-css' href='https://fonts.googleapis.com/css?family=Open+Sans%3A300italic%2C400%2C400italic%2C600%2C600italic%2C700%7CRoboto%3A300%2C400%2C400italic%2C500%2C500italic%2C700%2C900&#038;ver=6.8.3' type='text/css' media='all' />
+<link rel='stylesheet' id='shiftnav-css' href='https://www.raialyoum.com/wp-content/plugins/shiftnav-responsive-mobile-menu/assets/css/shiftnav.min.css?ver=1.7.1' type='text/css' media='all' />
+<link rel='stylesheet' id='shiftnav-font-awesome-css' href='https://www.raialyoum.com/wp-content/plugins/shiftnav-responsive-mobile-menu/assets/css/fontawesome/css/font-awesome.min.css?ver=1.7.1' type='text/css' media='all' />
+<link rel='stylesheet' id='shiftnav-standard-dark-css' href='https://www.raialyoum.com/wp-content/plugins/shiftnav-responsive-mobile-menu/assets/css/skins/standard-dark.css?ver=1.7.1' type='text/css' media='all' />
+<link rel='stylesheet' id='js_composer_front-css' href='https://www.raialyoum.com/wp-content/plugins/js_composer/assets/css/js_composer.min.css?ver=8.7.2' type='text/css' media='all' />
+<link rel='stylesheet' id='td-theme-css' href='https://www.raialyoum.com/wp-content/themes/Newspaper/style.css?ver=7.7' type='text/css' media='all' />
+<script type="text/javascript" src="https://www.raialyoum.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-content/plugins/easy-social-icons/js/cnss.js?ver=1.0" id="cnss_js-js"></script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-content/plugins/category-post-slider/js/jquery.cpsslider.js?ver=1.3" id="cps_plugin_js-js"></script>
+<script></script><link rel="https://api.w.org/" href="https://www.raialyoum.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://www.raialyoum.com/wp-json/wp/v2/posts/2070746" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.raialyoum.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.8.3" />
+<link rel="canonical" href="https://www.raialyoum.com/%d9%87%d9%84-%d8%b3%d9%8a%d8%b0%d9%87%d8%a8-%d8%a7%d9%84%d9%88%d9%81%d8%af-%d8%a7%d9%84%d8%a5%d9%8a%d8%b1%d8%a7%d9%86%d9%8a-%d8%a7%d9%84%d9%89-%d8%a7%d8%b3%d9%84%d8%a7%d9%85-%d8%a7%d8%a8%d8%a7%d8%af/" />
+<link rel='shortlink' href='https://wp.me/pdVrzQ-8GH8' />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://www.raialyoum.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.raialyoum.com%2F%25d9%2587%25d9%2584-%25d8%25b3%25d9%258a%25d8%25b0%25d9%2587%25d8%25a8-%25d8%25a7%25d9%2584%25d9%2588%25d9%2581%25d8%25af-%25d8%25a7%25d9%2584%25d8%25a5%25d9%258a%25d8%25b1%25d8%25a7%25d9%2586%25d9%258a-%25d8%25a7%25d9%2584%25d9%2589-%25d8%25a7%25d8%25b3%25d9%2584%25d8%25a7%25d9%2585-%25d8%25a7%25d8%25a8%25d8%25a7%25d8%25af%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://www.raialyoum.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.raialyoum.com%2F%25d9%2587%25d9%2584-%25d8%25b3%25d9%258a%25d8%25b0%25d9%2587%25d8%25a8-%25d8%25a7%25d9%2584%25d9%2588%25d9%2581%25d8%25af-%25d8%25a7%25d9%2584%25d8%25a5%25d9%258a%25d8%25b1%25d8%25a7%25d9%2586%25d9%258a-%25d8%25a7%25d9%2584%25d9%2589-%25d8%25a7%25d8%25b3%25d9%2584%25d8%25a7%25d9%2585-%25d8%25a7%25d8%25a8%25d8%25a7%25d8%25af%2F&#038;format=xml" />
+<style type="text/css">
+		ul.cnss-social-icon li.cn-fa-icon a:hover{opacity: 0.7!important;color:#ffffff!important;}
+		</style>
+	<!-- ShiftNav CSS
+	================================================================ -->
+	<style type="text/css" id="shiftnav-dynamic-css">
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+	@media only screen and (min-width:960px){ #shiftnav-toggle-main, .shiftnav-toggle-mobile{ display:none; } .shiftnav-wrap { padding-top:0 !important; } }
 
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
+/* Status: Loaded from Transient */
 
-<!-- Navigation -->
-<nav>
-  <div class="logo">OUT<span>CUBE</span></div>
-  <ul class="nav-links">
-    <li><a href="#solution">How It Works</a></li>
-    <li><a href="#markets">Markets</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="#contact" class="nav-cta">Request Demo</a>
-</nav>
+	</style>
+	<!-- end ShiftNav CSS -->
 
-<!-- Hero -->
-<section class="hero">
-  <div class="hero-eyebrow">Spatial Intelligence Studio — Dubai, UAE</div>
-  <h1 class="hero-title">
-    We show the<br><em>future</em> of any<br>site on Earth.
-  </h1>
-  <p class="hero-sub">
-    Outcube transforms real satellite data, geospatial terrain, and development plans into photorealistic simulations of what a property will become — before a single brick is laid. No drone. No permits. No limits.
-  </p>
-  <div class="hero-actions">
-    <a href="#contact" class="btn-primary">Book a Demonstration</a>
-    <a href="#solution" class="btn-secondary">See How It Works</a>
-  </div>
+	<!-- Stream WordPress user activity plugin v3.9.2 -->
+	<style>img#wpstats{display:none}</style>
+		<!--[if lt IE 9]><script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress."/>
 
-  <div class="hero-visual">
-    <div class="data-card">
-      <div class="data-card-label">Active Site Analysis</div>
-      <div class="data-card-value">Dubai Creek<br>Harbour</div>
-      <div class="data-card-unit">Masterplan Simulation · Phase 3</div>
-      <div class="data-card-pulse"></div>
-    </div>
-    <div class="data-card">
-      <div class="data-card-label">Satellite Resolution</div>
-      <div class="data-card-value">30<span style="font-size:18px">cm</span></div>
-      <div class="data-card-unit">Maxar WorldView · Live Data</div>
-    </div>
-    <div class="data-card">
-      <div class="data-card-label">Delivery Timeline</div>
-      <div class="data-card-value">72<span style="font-size:18px">hrs</span></div>
-      <div class="data-card-unit">vs 3–4 weeks traditional</div>
-    </div>
-    <div class="coord-display">
-      25°12'14"N · 55°16'48"E · ALT 0–450m · GCRS WGS84
-    </div>
-  </div>
-
-  <div class="scroll-hint">
-    <div class="scroll-line"></div>
-    <div class="scroll-label">Scroll</div>
-  </div>
-</section>
-
-<!-- Ticker -->
-<div class="ticker">
-  <div class="ticker-track" id="ticker">
-    <div class="ticker-item"><span>→</span> No drone flights</div>
-    <div class="ticker-item"><span>→</span> No airspace permits</div>
-    <div class="ticker-item"><span>→</span> Off-plan visualization</div>
-    <div class="ticker-item"><span>→</span> Satellite-accurate</div>
-    <div class="ticker-item"><span>→</span> 72-hour delivery</div>
-    <div class="ticker-item"><span>→</span> GCC-wide coverage</div>
-    <div class="ticker-item"><span>→</span> Future-state simulation</div>
-    <div class="ticker-item"><span>→</span> Developer-grade quality</div>
-    <div class="ticker-item"><span>→</span> No drone flights</div>
-    <div class="ticker-item"><span>→</span> No airspace permits</div>
-    <div class="ticker-item"><span>→</span> Off-plan visualization</div>
-    <div class="ticker-item"><span>→</span> Satellite-accurate</div>
-    <div class="ticker-item"><span>→</span> 72-hour delivery</div>
-    <div class="ticker-item"><span>→</span> GCC-wide coverage</div>
-    <div class="ticker-item"><span>→</span> Future-state simulation</div>
-    <div class="ticker-item"><span>→</span> Developer-grade quality</div>
-  </div>
-</div>
-
-<!-- Statement -->
-<div class="statement-band reveal">
-  <p class="statement-text">
-    Traditional aerial photography shows what <em>is.</em><br>
-    Outcube shows what <em>will be.</em>
-  </p>
-</div>
-
-<!-- Problem Section -->
-<section class="section reveal">
-  <div class="section-tag">The Problem We Solve</div>
-  <div class="problem-grid">
-    <div class="problem-item" data-num="01">
-      <div class="problem-title">Drone companies can't show the future</div>
-      <div class="problem-body">A drone can only film what exists today. For off-plan launches, masterplan presentations, and development pitches — there is nothing to film. Traditional aerial production is useless at the moment it matters most.</div>
-    </div>
-    <div class="problem-item" data-num="02">
-      <div class="problem-title">Permits, weather, and war risk ground operations</div>
-      <div class="problem-body">GCC airspace is increasingly restricted. Permits take 2–4 weeks. Weather delays compound. Geopolitical uncertainty creates operational risk. Every flight is a logistics problem that can fail at the last moment.</div>
-    </div>
-    <div class="problem-item" data-num="03">
-      <div class="problem-title">CGI studios work from drawings, not reality</div>
-      <div class="problem-body">Architectural visualization studios produce beautiful renders — but from CAD files and blueprints. Their output doesn't show you real streets, real shadows, real site context. It's a fantasy that floats in white space.</div>
-    </div>
-    <div class="problem-item" data-num="04">
-      <div class="problem-title">Investors and buyers can't see what they're buying</div>
-      <div class="problem-body">Off-plan real estate in Dubai represents billions in transactions annually. Buyers commit to units they cannot visit, in buildings that don't exist, in neighborhoods they cannot fully understand. Confidence requires vision.</div>
-    </div>
-  </div>
-</section>
-
-<!-- Solution -->
-<section class="solution-section" id="solution">
-  <div class="section-tag reveal">Our Solution</div>
-  <div class="solution-header reveal">
-    <h2 class="solution-title">
-      Real data.<br>
-      Future <em>vision.</em><br>
-      Cinematic output.
-    </h2>
-    <p class="solution-desc">
-      Outcube combines verified satellite imagery from Maxar and Airbus, photogrammetric terrain reconstruction, and AI-powered 3D rendering to produce spatially accurate simulations of developments that haven't been built yet — delivered with the visual quality of a feature film, at a fraction of the cost and time of traditional production.
-    </p>
-  </div>
-
-  <div class="pipeline reveal">
-    <div class="pipeline-step">
-      <span class="step-num">01 / 04</span>
-      <span class="step-icon">🛰</span>
-      <div class="step-name">Satellite Acquisition</div>
-      <div class="step-detail">We source verified imagery of your site from commercial satellite providers at up to 30cm resolution — current, georeferenced, and legally licensed.</div>
-      <div class="step-tool">Maxar · Airbus · Planet Labs · UP42</div>
-    </div>
-    <div class="pipeline-step">
-      <span class="step-num">02 / 04</span>
-      <span class="step-icon">⬡</span>
-      <div class="step-name">3D Reconstruction</div>
-      <div class="step-detail">Photogrammetric processing builds an accurate terrain mesh — real elevations, real building footprints, real site geometry — from satellite stereo pairs.</div>
-      <div class="step-tool">RealityCapture · Metashape · QGIS</div>
-    </div>
-    <div class="pipeline-step">
-      <span class="step-num">03 / 04</span>
-      <span class="step-icon">◈</span>
-      <div class="step-name">AI Development Layer</div>
-      <div class="step-detail">Your development plans, massing, and architecture are placed precisely onto the real site geometry — creating a spatially accurate future-state scene.</div>
-      <div class="step-tool">Unreal Engine 5 · Cinema 4D · AI Enhancement</div>
-    </div>
-    <div class="pipeline-step">
-      <span class="step-num">04 / 04</span>
-      <span class="step-icon">▶</span>
-      <div class="step-name">Cinematic Delivery</div>
-      <div class="step-detail">Photorealistic flythrough video, interactive 3D viewer, or static renders — delivered in 72 hours, ready for launch events, investor decks, and portals.</div>
-      <div class="step-tool">Luman Render · Gaussian Splatting · 4K Output</div>
-    </div>
-  </div>
-</section>
-
-<!-- Differentiators -->
-<section class="diff-section reveal">
-  <div class="section-tag">Why Outcube</div>
-  <div class="diff-grid">
-    <div class="diff-card">
-      <span class="diff-number">01</span>
-      <div class="diff-title">Future-Aware, Not Just Present-Accurate</div>
-      <div class="diff-text">We are the only studio in the GCC that can show a development site as it exists today and as it will look after completion — in a single continuous cinematic sequence. No competitor can offer this.</div>
-    </div>
-    <div class="diff-card">
-      <span class="diff-number">02</span>
-      <div class="diff-title">Satellite-Grounded, Not CAD-Fantasy</div>
-      <div class="diff-text">Every Outcube simulation is anchored to verified geospatial data. Your tower stands exactly where it will stand, casts shadows at the right angles, and sits in its real neighborhood — not floating in rendered white space.</div>
-    </div>
-    <div class="diff-card">
-      <span class="diff-number">03</span>
-      <div class="diff-title">No Operational Risk</div>
-      <div class="diff-text">No permits. No weather delays. No airspace restrictions. No equipment. No insurance requirements. Outcube operates entirely from data — meaning we can deliver from Dubai to Riyadh to London without a single flight.</div>
-    </div>
-    <div class="diff-card">
-      <span class="diff-number">04</span>
-      <div class="diff-title">72-Hour Turnaround</div>
-      <div class="diff-text">Traditional aerial production takes 3–4 weeks from permit to delivery. Outcube delivers a complete visualization package in 72 hours from project brief — critical for fast-moving launch timelines.</div>
-    </div>
-    <div class="diff-card">
-      <span class="diff-number">05</span>
-      <div class="diff-title">20 Years of 3D Expertise</div>
-      <div class="diff-text">Outcube is not an AI tool with a human operator. It is a professional 3D studio with two decades of spatial expertise, using AI to do in hours what previously took weeks. The artistry is irreplaceable.</div>
-    </div>
-    <div class="diff-card">
-      <span class="diff-number">06</span>
-      <div class="diff-title">Any Site on Earth</div>
-      <div class="diff-text">If a commercial satellite has photographed it — and they have photographed everything — Outcube can simulate it. Saudi Arabia, Qatar, Egypt, London. Geography is not a constraint we have.</div>
-    </div>
-  </div>
-</section>
-
-<!-- Markets -->
-<section class="markets-section" id="markets">
-  <div class="section-tag reveal">Who We Serve</div>
-  <div class="markets-grid reveal">
-    <div class="market-card">
-      <span class="market-tag">Primary Market</span>
-      <div class="market-title">Off-Plan Developers</div>
-      <div class="market-desc">You are selling something that doesn't exist yet. Buyers need to see it, feel it, and trust it. Outcube gives your launch the visual authority to command premium prices before groundbreaking.</div>
-      <div class="market-price">From AED 20,000 · Full launch package AED 40,000–80,000</div>
-    </div>
-    <div class="market-card">
-      <span class="market-tag">Primary Market</span>
-      <div class="market-title">Real Estate Investment Funds</div>
-      <div class="market-desc">Your partners and LPs need to assess sites without visiting. Outcube delivers a spatially accurate intelligence briefing — not just pretty pictures, but a genuine understanding of what a site represents.</div>
-      <div class="market-price">From AED 15,000 · Portfolio monitoring from AED 8,000/month</div>
-    </div>
-    <div class="market-card">
-      <span class="market-tag">Secondary Market</span>
-      <div class="market-title">Architecture & Urban Planning</div>
-      <div class="market-desc">Municipality submissions, masterplan reviews, and competition presentations demand visual authority. Outcube provides site-accurate context that stand-alone CGI renders cannot.</div>
-      <div class="market-price">From AED 25,000 · Masterplan simulation AED 60,000–150,000</div>
-    </div>
-    <div class="market-card">
-      <span class="market-tag">Secondary Market</span>
-      <div class="market-title">Construction Monitoring</div>
-      <div class="market-desc">Monthly satellite-based construction progress visualization for developers, lenders, and project teams. See exactly how your site evolves against the masterplan — without a single site visit.</div>
-      <div class="market-price">From AED 6,000/month · Quarterly from AED 18,000</div>
-    </div>
-  </div>
-</section>
-
-<!-- No Drone Comparison -->
-<section class="nodrone-section reveal">
-  <div>
-    <div class="section-tag">Outcube vs. Traditional Aerial</div>
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,56px);font-weight:300;line-height:1.1;margin-bottom:24px;color:var(--sand)">
-      The drone is not<br>the <em style="color:var(--gold);font-style:italic">point.</em>
-    </h2>
-    <p style="font-size:15px;line-height:1.8;color:var(--text-dim);max-width:420px">
-      The drone was always a means to an end — a way to get a camera above a site. Outcube achieves the same end through a fundamentally superior method: verified satellite data, processed through two decades of 3D expertise.
-    </p>
-  </div>
-  <div class="comparison-table">
-    <div class="ct-header">
-      <div class="ct-col">Capability</div>
-      <div class="ct-col them">Drone Co.</div>
-      <div class="ct-col us">Outcube</div>
-    </div>
-    <div class="ct-row">
-      <div class="ct-cell label">Shows unbuilt developments</div>
-      <div class="ct-cell bad">Never</div>
-      <div class="ct-cell good">Always</div>
-    </div>
-    <div class="ct-row">
-      <div class="ct-cell label">Requires permits</div>
-      <div class="ct-cell bad">2–4 weeks</div>
-      <div class="ct-cell good">None</div>
-    </div>
-    <div class="ct-row">
-      <div class="ct-cell label">Weather dependent</div>
-      <div class="ct-cell bad">Yes</div>
-      <div class="ct-cell good">No</div>
-    </div>
-    <div class="ct-row">
-      <div class="ct-cell label">Delivery timeline</div>
-      <div class="ct-cell bad">3–6 weeks</div>
-      <div class="ct-cell good">72 hours</div>
-    </div>
-    <div class="ct-row">
-      <div class="ct-cell label">GCC conflict zones</div>
-      <div class="ct-cell bad">Grounded</div>
-      <div class="ct-cell good">Unaffected</div>
-    </div>
-    <div class="ct-row">
-      <div class="ct-cell label">Before/after development</div>
-      <div class="ct-cell bad">Impossible</div>
-      <div class="ct-cell good">Core product</div>
-    </div>
-    <div class="ct-row">
-      <div class="ct-cell label">Covers entire GCC</div>
-      <div class="ct-cell bad">One team, one city</div>
-      <div class="ct-cell good">Any site, now</div>
-    </div>
-  </div>
-</section>
-
-<!-- Pricing -->
-<section class="pricing-section" id="pricing">
-  <div class="section-tag reveal">Investment</div>
-  <div class="pricing-grid reveal">
-    <div class="price-tier">
-      <div class="tier-name">Essential</div>
-      <div class="tier-price"><span class="tier-currency">AED</span> 8,000</div>
-      <div class="tier-period">per visualization</div>
-      <ul class="tier-features">
-        <li>5 aerial stills from satellite + AI</li>
-        <li>1 cinematic flythrough (60 sec)</li>
-        <li>Current site state + basic context</li>
-        <li>3-day delivery</li>
-        <li>2 revision rounds</li>
-      </ul>
-      <a href="#contact" class="btn-secondary" style="display:block;text-align:center">Enquire</a>
-    </div>
-    <div class="price-tier featured">
-      <div class="tier-name">Developer Launch</div>
-      <div class="tier-price"><span class="tier-currency">AED</span> 35,000</div>
-      <div class="tier-period">per project</div>
-      <ul class="tier-features">
-        <li>Full future-state development simulation</li>
-        <li>Cinematic launch film (2–3 min)</li>
-        <li>Today → tomorrow transition sequence</li>
-        <li>10 marketing stills, all formats</li>
-        <li>Interactive 3D viewer (embed-ready)</li>
-        <li>5-day delivery · unlimited revisions</li>
-      </ul>
-      <a href="#contact" class="btn-primary" style="display:block;text-align:center">Book Now</a>
-    </div>
-    <div class="price-tier">
-      <div class="tier-name">Masterplan Studio</div>
-      <div class="tier-price" style="font-size:36px">Custom</div>
-      <div class="tier-period">project-based pricing</div>
-      <ul class="tier-features">
-        <li>Large-scale masterplan simulation</li>
-        <li>Government & municipality submissions</li>
-        <li>Multi-phase development timelines</li>
-        <li>Investor presentation suite</li>
-        <li>Monthly monitoring retainer option</li>
-        <li>Dedicated project manager</li>
-      </ul>
-      <a href="#contact" class="btn-secondary" style="display:block;text-align:center">Discuss Project</a>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section reveal">
-  <h2 class="cta-title">
-    See your site's<br><em>future</em> today.
-  </h2>
-  <p class="cta-sub">
-    Send us your site coordinates, development brief, or listing. We'll show you what Outcube can produce — no commitment required.
-  </p>
-  <div class="cta-actions">
-    <a href="mailto:hello@outcube.ae" class="btn-primary">Start a Project</a>
-    <a href="#solution" class="btn-secondary">Review Our Process</a>
-  </div>
-</section>
-
-<!-- Contact strip -->
-<div class="contact-strip" id="contact">
-  <div class="contact-mono">Dubai, UAE · GCC & International</div>
-  <div class="contact-mono">
-    <a href="mailto:hello@outcube.ae">hello@outcube.ae</a>
-    &nbsp;&nbsp;·&nbsp;&nbsp;
-    <a href="tel:+971000000000">+971 00 000 0000</a>
-  </div>
-  <div class="contact-mono">© 2025 Outcube Spatial Intelligence</div>
-</div>
-
-<!-- Footer -->
-<footer>
-  <div class="footer-logo">OUT<span>CUBE</span></div>
-  <ul class="footer-links">
-    <li><a href="#solution">Process</a></li>
-    <li><a href="#markets">Markets</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div class="footer-copy">Spatial Intelligence Studio · Dubai, UAE</div>
-</footer>
+<!-- JS generated by theme -->
 
 <script>
-  // Custom cursor
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  function animateCursor() {
-    cursor.style.left = mx + 'px';
-    cursor.style.top = my + 'px';
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(animateCursor);
-  }
-  animateCursor();
+    
+    
 
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.width = '16px';
-      cursor.style.height = '16px';
-      ring.style.width = '48px';
-      ring.style.height = '48px';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.width = '8px';
-      cursor.style.height = '8px';
-      ring.style.width = '32px';
-      ring.style.height = '32px';
-    });
-  });
+	    var tdBlocksArray = []; //here we store all the items for the current page
 
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  reveals.forEach(r => observer.observe(r));
+	    //td_block class - each ajax block uses a object of this class for requests
+	    function tdBlock() {
+		    this.id = '';
+		    this.block_type = 1; //block type id (1-234 etc)
+		    this.atts = '';
+		    this.td_column_number = '';
+		    this.td_current_page = 1; //
+		    this.post_count = 0; //from wp
+		    this.found_posts = 0; //from wp
+		    this.max_num_pages = 0; //from wp
+		    this.td_filter_value = ''; //current live filter value
+		    this.is_ajax_running = false;
+		    this.td_user_action = ''; // load more or infinite loader (used by the animation)
+		    this.header_color = '';
+		    this.ajax_pagination_infinite_stop = ''; //show load more at page x
+	    }
 
-  // Smooth anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
+
+        // td_js_generator - mini detector
+        (function(){
+            var htmlTag = document.getElementsByTagName("html")[0];
+
+            if ( navigator.userAgent.indexOf("MSIE 10.0") > -1 ) {
+                htmlTag.className += ' ie10';
+            }
+
+            if ( !!navigator.userAgent.match(/Trident.*rv\:11\./) ) {
+                htmlTag.className += ' ie11';
+            }
+
+            if ( /(iPad|iPhone|iPod)/g.test(navigator.userAgent) ) {
+                htmlTag.className += ' td-md-is-ios';
+            }
+
+            var user_agent = navigator.userAgent.toLowerCase();
+            if ( user_agent.indexOf("android") > -1 ) {
+                htmlTag.className += ' td-md-is-android';
+            }
+
+            if ( -1 !== navigator.userAgent.indexOf('Mac OS X')  ) {
+                htmlTag.className += ' td-md-is-os-x';
+            }
+
+            if ( /chrom(e|ium)/.test(navigator.userAgent.toLowerCase()) ) {
+               htmlTag.className += ' td-md-is-chrome';
+            }
+
+            if ( -1 !== navigator.userAgent.indexOf('Firefox') ) {
+                htmlTag.className += ' td-md-is-firefox';
+            }
+
+            if ( -1 !== navigator.userAgent.indexOf('Safari') && -1 === navigator.userAgent.indexOf('Chrome') ) {
+                htmlTag.className += ' td-md-is-safari';
+            }
+
+            if( -1 !== navigator.userAgent.indexOf('IEMobile') ){
+                htmlTag.className += ' td-md-is-iemobile';
+            }
+
+        })();
+
+
+
+
+        var tdLocalCache = {};
+
+        ( function () {
+            "use strict";
+
+            tdLocalCache = {
+                data: {},
+                remove: function (resource_id) {
+                    delete tdLocalCache.data[resource_id];
+                },
+                exist: function (resource_id) {
+                    return tdLocalCache.data.hasOwnProperty(resource_id) && tdLocalCache.data[resource_id] !== null;
+                },
+                get: function (resource_id) {
+                    return tdLocalCache.data[resource_id];
+                },
+                set: function (resource_id, cachedData) {
+                    tdLocalCache.remove(resource_id);
+                    tdLocalCache.data[resource_id] = cachedData;
+                }
+            };
+        })();
+
+    
+    
+var td_viewport_interval_list=[{"limitBottom":767,"sidebarWidth":228},{"limitBottom":1018,"sidebarWidth":300},{"limitBottom":1140,"sidebarWidth":324}];
+var td_ajax_url="https:\/\/www.raialyoum.com\/wp-admin\/admin-ajax.php?td_theme_name=Newspaper&v=7.7";
+var td_get_template_directory_uri="https:\/\/www.raialyoum.com\/wp-content\/themes\/Newspaper";
+var tds_snap_menu="";
+var tds_logo_on_sticky="";
+var tds_header_style="";
+var td_please_wait="\u064a\u0631\u062c\u0649 \u0627\u0644\u0627\u0646\u062a\u0638\u0627\u0631 ...";
+var td_email_user_pass_incorrect="\u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645 \u0623\u0648 \u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631 \u063a\u064a\u0631 \u0635\u062d\u064a\u062d\u0629!";
+var td_email_user_incorrect="\u0627\u0644\u0628\u0631\u064a\u062f \u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a \u0623\u0648 \u0627\u0633\u0645 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645 \u063a\u064a\u0631 \u0635\u062d\u064a\u062d!";
+var td_email_incorrect="\u0627\u0644\u0628\u0631\u064a\u062f \u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a \u063a\u064a\u0631 \u0635\u062d\u064a\u062d!";
+var tds_more_articles_on_post_enable="";
+var tds_more_articles_on_post_time_to_wait="";
+var tds_more_articles_on_post_pages_distance_from_top=2000;
+var tds_theme_color_site_wide="#4db2ec";
+var tds_smart_sidebar="";
+var tdThemeName="Newspaper";
+var td_magnific_popup_translation_tPrev="\u0627\u0644\u0633\u0627\u0628\u0642 (\u0645\u0646 \u0627\u0644\u064a\u0633\u0627\u0631 \u0645\u0641\u062a\u0627\u062d \u0627\u0644\u0633\u0647\u0645)";
+var td_magnific_popup_translation_tNext="\u0627\u0644\u062a\u0627\u0644\u064a (\u0627\u0644\u0635\u062d\u064a\u062d \u0645\u0641\u062a\u0627\u062d \u0627\u0644\u0633\u0647\u0645)";
+var td_magnific_popup_translation_tCounter="%curr% \u0645\u0646 %total%";
+var td_magnific_popup_translation_ajax_tError="\u0627\u0644\u0645\u062d\u062a\u0648\u0649 \u0645\u0646 %url% \u0644\u0627 \u064a\u0645\u0643\u0646 \u062a\u062d\u0645\u064a\u0644.";
+var td_magnific_popup_translation_image_tError="\u0644\u0627 \u064a\u0645\u0643\u0646 \u062a\u062d\u0645\u064a\u0644 \u0635\u0648\u0631\u0629 #%curr%.";
+var td_ad_background_click_link="";
+var td_ad_background_click_target="";
 </script>
+
+
+<!-- Header style compiled by theme -->
+
+<style>
+    
+
+body {
+	background-color:#f9eee3;
+}
+.td-header-top-menu,
+    .td-header-top-menu a,
+    .td-header-wrap .td-header-top-menu-full .td-header-top-menu,
+    .td-header-wrap .td-header-top-menu-full a,
+    .td-header-style-8 .td-header-top-menu,
+    .td-header-style-8 .td-header-top-menu a {
+        color: #003773;
+    }
+
+    
+    .sf-menu ul .td-menu-item > a:hover,
+    .sf-menu ul .sfHover > a,
+    .sf-menu ul .current-menu-ancestor > a,
+    .sf-menu ul .current-category-ancestor > a,
+    .sf-menu ul .current-menu-item > a,
+    .sf-menu > .current-menu-item > a:after,
+    .sf-menu > .current-menu-ancestor > a:after,
+    .sf-menu > .current-category-ancestor > a:after,
+    .sf-menu > li:hover > a:after,
+    .sf-menu > .sfHover > a:after,
+    .td_block_mega_menu .td-next-prev-wrap a:hover,
+    .td-mega-span .td-post-category:hover,
+    .td-header-wrap .black-menu .sf-menu > li > a:hover,
+    .td-header-wrap .black-menu .sf-menu > .current-menu-ancestor > a,
+    .td-header-wrap .black-menu .sf-menu > .sfHover > a,
+    .header-search-wrap .td-drop-down-search:after,
+    .header-search-wrap .td-drop-down-search .btn:hover,
+    .td-header-wrap .black-menu .sf-menu > .current-menu-item > a,
+    .td-header-wrap .black-menu .sf-menu > .current-menu-ancestor > a,
+    .td-header-wrap .black-menu .sf-menu > .current-category-ancestor > a {
+        background-color: #ffffff;
+    }
+
+
+    .td_block_mega_menu .td-next-prev-wrap a:hover {
+        border-color: #ffffff;
+    }
+
+    .header-search-wrap .td-drop-down-search:before {
+        border-color: transparent transparent #ffffff transparent;
+    }
+
+    .td_mega_menu_sub_cats .cur-sub-cat,
+    .td_mod_mega_menu:hover .entry-title a {
+        color: #ffffff;
+    }
+
+
+    
+    .td-header-wrap .td-header-menu-wrap .sf-menu > li > a,
+    .td-header-wrap .header-search-wrap .td-icon-search {
+        color: #373a88;
+    }
+
+
+    
+    @media (max-width: 767px) {
+        body .td-header-wrap .td-header-main-menu {
+            background-color: #1e73be !important;
+        }
+    }
+
+
+    
+    .td-footer-wrapper,
+    .td-footer-wrapper .td_block_template_7 .td-block-title > *,
+    .td-footer-wrapper .td_block_template_17 .td-block-title,
+    .td-footer-wrapper .td-block-title-wrap .td-wrapper-pulldown-filter {
+        background-color: #ffffff;
+    }
+
+    
+    .td-sub-footer-container {
+        background-color: rgba(13,13,13,0.5);
+    }
+</style>
+
+<noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>
+<meta property="og:ttl" content="2419200" />
+
+
+
+
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E3GKNDXYMS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E3GKNDXYMS');
+</script>
+
+<body data-rsssl=1 class="wp-singular post-template-default single single-post postid-2070746 single-format-standard wp-theme-Newspaper ------ global-block-template-1 wpb-js-composer js-comp-ver-8.7.2 vc_responsive td-boxed-layout" itemscope="itemscope" itemtype="https://schema.org/WebPage">
+
+
+
+        <div class="td-scroll-up"><i class="td-icon-menu-up"></i></div>
+    
+    <div class="td-menu-background"></div>
+<div id="td-mobile-nav">
+    <div class="td-mobile-container">
+        <!-- mobile menu top section -->
+        <div class="td-menu-socials-wrap">
+            <!-- socials -->
+            <div class="td-menu-socials">
+                            </div>
+            <!-- close button -->
+            <div class="td-mobile-close">
+                <a href="#"><i class="td-icon-close-mobile"></i></a>
+            </div>
+        </div>
+
+        <!-- login section -->
+        
+        <!-- menu section -->
+        <div class="td-mobile-content">
+            <div class="menu-main-container"><ul id="menu-main" class="td-mobile-main-menu"><li id="menu-item-434552" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-first menu-item-434552"><a href="/">مدخل</a></li>
+<li id="menu-item-376874" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-376874"><a href="https://www.raialyoum.com/category/%d8%b9%d8%a8%d8%af-%d8%a7%d9%84%d8%a8%d8%a7%d8%b1%d9%8a-%d8%b9%d8%b7%d9%88%d8%a7%d9%86/">كلمة رئيس التحرير</a></li>
+<li id="menu-item-376876" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-376876"><a href="https://www.raialyoum.com/category/%d8%a3%d8%ae%d8%a8%d8%a7%d8%b1-%d8%ae%d8%a7%d8%b5%d8%a9/">أخبار خاصة</a></li>
+<li id="menu-item-376877" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-376877"><a href="https://www.raialyoum.com/category/%d8%a3%d8%ad%d8%af%d8%ab-%d8%a7%d9%84%d8%a3%d8%ae%d8%a8%d8%a7%d8%b1/">اخر الاخبار</a></li>
+<li id="menu-item-376880" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-376880"><a href="https://www.raialyoum.com/category/%d8%aa%d8%ad%d9%82%d9%8a%d9%82%d8%a7%d8%aa-%d9%88%d9%85%d9%82%d8%a7%d8%a8%d9%84%d8%a7%d8%aa-%d8%ae%d8%a7%d8%b5%d8%a9/">تحقيقات و دراسات</a></li>
+<li id="menu-item-376883" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-376883"><a href="https://www.raialyoum.com/category/%d8%ad%d9%88%d8%a7%d8%b1-%d9%85%d9%81%d8%aa%d9%88%d8%ad/">حوار مفتوح</a></li>
+<li id="menu-item-376890" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-376890"><a href="https://www.raialyoum.com/category/%d8%b1%d9%8a%d8%a7%d8%b6%d8%a9/">رياضة</a></li>
+<li id="menu-item-376893" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-376893"><a href="https://www.raialyoum.com/category/%d8%ba%d8%b0%d8%a7%d8%a1-%d9%88%d8%af%d9%88%d8%a7%d8%a1/">غذاء ودواء</a></li>
+<li id="menu-item-1649051" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1649051"><a href="https://www.raialyoum.com/category/%d8%b5%d8%ad%d8%a9-%d9%88%d8%ac%d9%85%d8%a7%d9%84/">صحة وجمال</a></li>
+<li id="menu-item-376878" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-376878"><a href="https://www.raialyoum.com/category/%d9%85%d8%ae%d8%aa%d8%b5%d8%b1-%d9%85%d9%81%d9%8a%d8%af/">مختصر مفيد</a></li>
+<li id="menu-item-377318" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-377318"><a href="https://www.raialyoum.com/category/%d9%83%d8%aa%d8%a7%d8%a8-%d9%88-%d8%a7%d8%b1%d8%a7%d8%a1/">كتاب و آراء</a></li>
+<li id="menu-item-349" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-349"><a href="https://www.raialyoum.com/category/%d8%b5%d8%ad%d9%81-%d8%b9%d8%b1%d8%a8%d9%8a%d8%a9-%d9%88%d8%b9%d8%a7%d9%84%d9%85%d9%8a%d8%a9/">صحف</a></li>
+<li id="menu-item-2789" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2789"><a href="https://www.raialyoum.com/category/%d8%a7%d9%82%d8%aa%d8%b5%d8%a7%d8%af/">اقتصاد</a></li>
+<li id="menu-item-1649050" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1649050"><a href="https://www.raialyoum.com/category/%d8%b3%d9%8a%d8%a7%d8%ad%d8%a9/">سياحة</a></li>
+<li id="menu-item-128" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-128"><a href="https://www.raialyoum.com/category/%d8%a7%d9%87%d9%84-%d9%88-%d8%a7%d9%84%d9%81%d9%86/">اهل الفن</a></li>
+<li id="menu-item-864319" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-864319"><a href="https://www.raialyoum.com/category/%d8%b9%d8%b7%d9%88%d8%a7%d9%86-%d9%8a%d9%88%d8%aa%d9%8a%d9%88%d8%a8/">عطوان فيديو</a></li>
+<li id="menu-item-411686" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-411686"><a href="https://www.raialyoum.com/category/%d8%ab%d9%82%d8%a7%d9%81%d8%a9/">ثقافة</a></li>
+<li id="menu-item-130" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-130"><a href="/الاتصال-بنا/">الاتصال بنا</a></li>
+<li id="menu-item-8953" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8953"><a href="https://www.raialyoum.com/category/english/">English</a></li>
+</ul></div>        </div>
+    </div>
+
+    <!-- register/login section -->
+    </div>    <div class="td-search-background"></div>
+<div class="td-search-wrap-mob">
+	<div class="td-drop-down-search" aria-labelledby="td-header-search-button">
+		<form method="get" class="td-search-form" action="https://www.raialyoum.com/">
+			<!-- close button -->
+			<div class="td-search-close">
+				<a href="#"><i class="td-icon-close-mobile"></i></a>
+			</div>
+			<div role="search" class="td-search-input">
+				<span>بحث</span>
+				<input id="td-header-search-mob" type="text" value="" name="s" autocomplete="off" />
+			</div>
+		</form>
+		<div id="td-aj-search-mob"></div>
+	</div>
+</div>    
+    
+    <div id="td-outer-wrap" class="td-theme-wrap">
+	<a href="/wp-admin/post-new.php"><div style="z-index: 9999;position:absolute; left:50%;font-size:12px;" >10th Apr 2026</div></a>
+
+
+
+
+	   <!--
+Header style 1
+-->
+
+<div class="td-header-wrap td-header-style-1">
+
+    <div class="td-header-top-menu-full">
+        <div class="td-container td-header-row td-header-top-menu">
+            <!-- LOGIN MODAL -->
+        </div>
+    </div>
+
+    <div class="td-banner-wrap-full td-logo-wrap-full">
+        <div class="td-container td-header-row td-header-header">
+            <div class="td-header-sp-logo">
+                            </div>
+            <div class="td-header-sp-recs">
+                <div class="td-header-rec-wrap">
+    	<center><a href="/"><img src="https://www.raialyoum.com/wp-content/uploads/2018/02/logo.jpg"></a></center>
+</div>            </div>
+        </div>
+    </div>
+
+    <div class="td-header-menu-wrap-full">
+        <div class="td-header-menu-wrap td-header-gradient">
+            <div class="td-container td-header-row td-header-main-menu">
+                <div id="td-header-menu" role="navigation">
+    <div id="td-top-mobile-toggle"><a href="#"><i class="td-icon-font td-icon-mobile"></i></a></div>
+    <div class="td-main-menu-logo td-logo-in-header">
+            </div>
+    <div class="menu-main-container"><ul id="menu-main-1" class="sf-menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-first td-menu-item td-normal-menu menu-item-434552"><a href="/">مدخل</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent td-menu-item td-normal-menu menu-item-376874"><a href="https://www.raialyoum.com/category/%d8%b9%d8%a8%d8%af-%d8%a7%d9%84%d8%a8%d8%a7%d8%b1%d9%8a-%d8%b9%d8%b7%d9%88%d8%a7%d9%86/">كلمة رئيس التحرير</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-376876"><a href="https://www.raialyoum.com/category/%d8%a3%d8%ae%d8%a8%d8%a7%d8%b1-%d8%ae%d8%a7%d8%b5%d8%a9/">أخبار خاصة</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-376877"><a href="https://www.raialyoum.com/category/%d8%a3%d8%ad%d8%af%d8%ab-%d8%a7%d9%84%d8%a3%d8%ae%d8%a8%d8%a7%d8%b1/">اخر الاخبار</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-376880"><a href="https://www.raialyoum.com/category/%d8%aa%d8%ad%d9%82%d9%8a%d9%82%d8%a7%d8%aa-%d9%88%d9%85%d9%82%d8%a7%d8%a8%d9%84%d8%a7%d8%aa-%d8%ae%d8%a7%d8%b5%d8%a9/">تحقيقات و دراسات</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-376883"><a href="https://www.raialyoum.com/category/%d8%ad%d9%88%d8%a7%d8%b1-%d9%85%d9%81%d8%aa%d9%88%d8%ad/">حوار مفتوح</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-376890"><a href="https://www.raialyoum.com/category/%d8%b1%d9%8a%d8%a7%d8%b6%d8%a9/">رياضة</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-376893"><a href="https://www.raialyoum.com/category/%d8%ba%d8%b0%d8%a7%d8%a1-%d9%88%d8%af%d9%88%d8%a7%d8%a1/">غذاء ودواء</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1649051"><a href="https://www.raialyoum.com/category/%d8%b5%d8%ad%d8%a9-%d9%88%d8%ac%d9%85%d8%a7%d9%84/">صحة وجمال</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-376878"><a href="https://www.raialyoum.com/category/%d9%85%d8%ae%d8%aa%d8%b5%d8%b1-%d9%85%d9%81%d9%8a%d8%af/">مختصر مفيد</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-377318"><a href="https://www.raialyoum.com/category/%d9%83%d8%aa%d8%a7%d8%a8-%d9%88-%d8%a7%d8%b1%d8%a7%d8%a1/">كتاب و آراء</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-349"><a href="https://www.raialyoum.com/category/%d8%b5%d8%ad%d9%81-%d8%b9%d8%b1%d8%a8%d9%8a%d8%a9-%d9%88%d8%b9%d8%a7%d9%84%d9%85%d9%8a%d8%a9/">صحف</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-2789"><a href="https://www.raialyoum.com/category/%d8%a7%d9%82%d8%aa%d8%b5%d8%a7%d8%af/">اقتصاد</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1649050"><a href="https://www.raialyoum.com/category/%d8%b3%d9%8a%d8%a7%d8%ad%d8%a9/">سياحة</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-128"><a href="https://www.raialyoum.com/category/%d8%a7%d9%87%d9%84-%d9%88-%d8%a7%d9%84%d9%81%d9%86/">اهل الفن</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-864319"><a href="https://www.raialyoum.com/category/%d8%b9%d8%b7%d9%88%d8%a7%d9%86-%d9%8a%d9%88%d8%aa%d9%8a%d9%88%d8%a8/">عطوان فيديو</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-411686"><a href="https://www.raialyoum.com/category/%d8%ab%d9%82%d8%a7%d9%81%d8%a9/">ثقافة</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom td-menu-item td-normal-menu menu-item-130"><a href="/الاتصال-بنا/">الاتصال بنا</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-8953"><a href="https://www.raialyoum.com/category/english/">English</a></li>
+</ul></div>	
+</div>
+
+
+<div class="td-search-wrapper">
+    <div id="td-top-search">
+        <!-- Search -->
+        <div class="header-search-wrap">
+            <div class="dropdown header-search">
+                <a id="td-header-search-button" href="#" role="button" class="dropdown-toggle " data-toggle="dropdown"><i class="td-icon-search"></i></a>
+                <a id="td-header-search-button-mob" href="#" role="button" class="dropdown-toggle " data-toggle="dropdown"><i class="td-icon-search"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="header-search-wrap">
+	<div class="dropdown header-search">
+		<div class="td-drop-down-search" aria-labelledby="td-header-search-button">
+			<form method="get" class="td-search-form" action="https://www.raialyoum.com/">
+				<div role="search" class="td-head-form-search-wrap">
+					<input id="td-header-search" type="text" value="" name="s" autocomplete="off" /><input class="wpb_button wpb_btn-inverse btn" type="submit" id="td-header-search-top" value="بحث" />
+				</div>
+			</form>
+			<div id="td-aj-search"></div>
+		</div>
+	</div>
+</div>            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="td-main-content-wrap">
+
+    <div class="td-container td-post-template-default td-sidebar-left">
+        <div class="td-crumb-container"></div>
+
+
+<!-- /217464089/RY-300x250-Bottom-MPU-->
+<center><div id='div-gpt-ad-1526443718830-5' style='min-width: 300px; min-height: 90px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1526443718830-5'); });
+  </script>
+</div></center>
+
+
+<a href="/wp-admin/post.php?post=2070746&action=edit"><font style='font-family:Ubuntu;font-size:11px; font-style:italic;color:#303030;'>
+			
+			
+				<div  style="text-align:center; padding-bottom: 10px;">
+				<center>Apr 09, 2026</center>				</div>
+				</font></a>
+				
+				
+
+				
+
+
+
+
+		<div class="td-pb-row">
+                                    <div class="td-pb-span8 td-main-content td-sidebar-left-content" role="main">
+                            <div class="td-ss-main-content">
+                                ﻿
+    <article id="post-2070746" class="post-2070746 post type-post status-publish format-standard has-post-thumbnail hentry category-fb category-newsletter category-telegram category-21 category-10" itemscope itemtype="https://schema.org/Article">
+        <div class="td-post-header">
+
+            
+								
+					<header class="td-post-title">
+                <h1 class="entry-title">هل سيذهب الوفد الإيراني الى &#8220;اسلام اباد&#8221; للقاء نظيره الأمريكي بعد مجزرة لبنان؟ ولماذا أقدم نتنياهو عليها بعد ساعات من وقف اطلاق النار؟ وكيف جاء رد &#8220;حزب الله&#8221; الصاروخي السريع صادما لإسرائيل وامريكا معا؟</h1>
+
+                
+
+                <div class="td-module-meta-info">
+                                                                                                </div>
+
+            </header>
+			
+			
+			  
+
+        <div class="td-post-content">
+
+        
+        <h4 style="direction: rtl;"><img fetchpriority="high" decoding="async" class="size-full wp-image-2070747 aligncenter" src="https://www.raialyoum.com/wp-content/uploads/2026/04/2026-04-09_15-29-47_157043.jpg" alt="" width="409" height="348" srcset="https://www.raialyoum.com/wp-content/uploads/2026/04/2026-04-09_15-29-47_157043.jpg 409w, https://www.raialyoum.com/wp-content/uploads/2026/04/2026-04-09_15-29-47_157043-82x70.jpg 82w, https://www.raialyoum.com/wp-content/uploads/2026/04/2026-04-09_15-29-47_157043-165x140.jpg 165w, https://www.raialyoum.com/wp-content/uploads/2026/04/2026-04-09_15-29-47_157043-188x160.jpg 188w, https://www.raialyoum.com/wp-content/uploads/2026/04/2026-04-09_15-29-47_157043-376x320.jpg 376w" sizes="(max-width: 409px) 100vw, 409px" /></h4>
+<h4 style="direction: rtl;"></h4>
+<h4 style="direction: rtl;"></h4>
+<h4 style="direction: rtl;">عبد الباري عطوان</h4>
+<h4 style="direction: rtl;"></h4>
+<h4 style="direction: rtl;">هذه المجازر التي ارتكبتها الغارات الإسرائيلية في لبنان يوم أمس الأربعاء وأدت الى استشهاد 254 شخصا واصابة 1165 آخرين، اغلبيتهم الساحقة من المدنيين الأبرياء، وبعد ساعات معدودة من قرار وقف إطلاق النار بين ايران وامريكا لمدة أسبوعين، بوساطة السيد شهبار شريف رئيس وزراء باكستان، هذه المجازر تؤكد مجددا ثلاث نقاط رئيسية:</h4>
+<ul>
+<li>
+<h4 style="direction: rtl;">الأولى: الولايات المتحدة قبلت بهذه الهدنة ليس لتحقيق وقف فعلي للعدوان الذي تشنه مع إسرائيل ضد ايران، وانما لإنقاذ ماء وجه ترامب الذي تحول الى مسخرة عالمية، وأهان الولايات المتحدة الامريكية بتهديداته البهلوانية بالتدمير الساحق، وفتح أبواب جهنم، وازالة ايران وحضارتها من الكرة الأرضية، وهي تهديدات مرفوقة بفترات زمنية أقدم على تمديد آخرها أكثر من أربع مرات.</h4>
+</li>
+<li>
+<h4 style="direction: rtl;">الثانية: رسالة دموية من نتنياهو يريد من خلالها ليس وأد هذا الاتفاق بعد ساعات من التوصل اليه فقط، وانما التأكيد انه صاحب الكلمة الأولى والأخيرة، وان ترامب الذي يعتبره نتنياهو خادما عنده، لا يملك قرار الحرب والسلام في منطقة الشرق الأوسط.</h4>
+</li>
+<li>
+<h4 style="direction: rtl;">الثالثة: الوسطاء، والعرب والمسلمون منهم، مجرد دمى في يد دولتي العدوان الأمريكي الإسرائيلي، وشهود زور لا يمكن الاعتداد بأقوالهم، وشهاداتهم، والمقصود هنا شهباز شريف رئيس الوزراء الباكستاني الذي أكد ان وقف اطلاق النار المتفق عليه بين أمريكا وايران بوساطته شخصيا ينطبق على لبنان أيضا، ويشملها في رد على تبني ترامب وحكومته للرواية الإسرائيلية.</h4>
+</li>
+</ul>
+<h4 style="direction: rtl;"></h4>
+<h4 style="direction: rtl; text-align: center;">***</h4>
+<h4></h4>
+<h4 style="direction: rtl;">حذرنا ايران، الدولة الإسلامية الشقيقة، أكثر من مرة في هذا المكان من الغدر الأمريكي الصهيوني، ومن اللدغ للمرة الثالثة من الجحر نفسه، ونحن ندرك جيدا انهم يدركون هذه الحقيقة فعلا، ولكن المثل الذي يقول &#8220;ان من يده في النار غير الذي يده في الماء&#8221;، ينطبق على القيادة الإيرانية التي تؤمن بإتخاذ كل الاحتياجات اللازمة لوقف الحرب التي لا يريدها أحد، وحتى لا تتحمل مسؤوليتها وما يترتب عليها من التزامات قانونية.</h4>
+<h4 style="direction: rtl;">كنا وما زلنا نؤمن بأن دولة الاحتلال الإسرائيلي لا تريد وقف هذا العدوان حتى تحقق جميع أهدافه، وأبرزها تغيير النظام، وإجتثاث البرنامجين النووي والصاروخي الإيرانيين من جذورها، وانهاء التهديد الوجودي الإيراني لها، وتحويل ايران الى دولة فاشلة مثلها مثل ليبيا وسورية، مقطعة الأطراف تسودها الفوضى السياسية والعسكرية، ولهذه الأسباب، منفردة او مجتمعة، سارعت الى قصف هذا الاتفاق الإيراني الأمريكي بالصواريخ والطائرات التي أطلقتها باتجاه لبنان وحزب الله وحاضنته الشعبية الوطنية الدافئة.</h4>
+<h4 style="direction: rtl;">ان يرد &#8220;حزب الله&#8221; بإطلاق 30 صاروخا فجر اليوم الخميس لقصف المستوطنات الإسرائيلية شمال الجليل الفلسطيني المحتل، استئنافا لقصفه الصاروخي والمسيّراتي الذي بدأه منذ اليوم الأول للعدوان الأمريكي الإسرائيلي على ايران في 28 شباط (فبراير) الماضي، تأكيدا على وحدة الساحات، فهذا الرد يؤكد على فشل العدوان الإسرائيلي السابق على لبنان قبل عام ونصف العام، الذي بدأ بحربي البيجرات والاغتيالات، في القضاء على المقاومة الإسلامية اللبنانية، واخراجها من المعادلات العسكرية والسياسية في لبنان والمنطقة، وهذه العودة العسكرية القوية للحزب التي نراها حاليا، تأتي ردا مُفحما وعمليا وميدانيا، لكل السذج الذين اكدوا بكل الطرق والوسائل، وتبادلوا التهاني بانتهائه، وخروجه الكلي من المعادلات السياسية والعسكرية في لبنان والمنطقة بأسرها.</h4>
+<h4 style="direction: rtl;">ندرك جيدا ان فرص ذهاب الوفد الإيراني الرسمي المفاوض بقيادة محمد باقر قاليباف رئيس مجلس الشورى الإيراني أكبر بكثير من فرص المقاطعة، لان ايران تتبنى كدولة نظرية &#8220;نعم.. ولكن&#8221;، ولهذا لن نطالبها بعدم الذهاب الى مصيدة المفاوضات مع أمريكا التي جرى نصبها لها في اسلام اباد بتخطيط من المكر الصهيوني الشهير، ومشاركة السلطات الباكستانية &#8220;المسلمة&#8221; للأسف.</h4>
+<h4 style="direction: rtl;">ان تصمد ايران 40 يوما في مواجهة العدوان الإسرائيلي الأمريكي، وتدمر صواريخها الفرط صوتية والانشطارية الرؤوس معظم تل ابيب الكبرى والبنى التحتية الاستراتيجية لمدن حيفا وعكا وايلات وبئر السبع وعسقلان واسدود، فهذا انتصار كبير يضع بداية النهاية للكيان العنصري الإرهابي الصهيوني، والهيبة الامريكية، ومن يتخذ قرار الحرب، ويكون على العهد، ولا يتردد، مطلقا في قصف تل ابيب، فلا خوف عليه من المصائد الصهيونية الامريكية، ولعل هذا القصف الصاروخي المكثف لحزب الله والرد الفوري على المجزرة الإسرائيلية في لبنان يؤكد كل ما نقول، ويأتي في إطار الحق المشروع في الدفاع عن النفس، وربما بالاتفاق مع الحليف الإيراني أيضا.</h4>
+<h4 style="direction: rtl;"></h4>
+<h4 style="direction: rtl; text-align: center;">***</h4>
+<h4 style="direction: rtl;"></h4>
+<h4 style="direction: rtl;">ما يؤلمنا ان يعقد مجلس الوزراء &#8220;اللبناني&#8221; اجتماعا طارئا، برئاسة رئيس الجمهورية جوزيف عون وحضور رئيس الوزراء نواف سلام، ليس لإصدار قرار للجيش اللبناني بالتصدي للعدوان الإسرائيلي وتوفير الحماية للشعب اللبناني، والدفاع عن السيادة للدولة اللبنانية، وانما للتأكيد على حتمية نزع سلاح المقاومة، وحصر حمل السلاح في يد القوى الشرعية فقط، هل هذا وقته.. على الأقل اصمتوا احتراما لأرواح الشهداء ودمائهم.. وتوقفوا عن استفزاز غالبية اللبنانيين.</h4>
+<h4 style="direction: rtl;">نتعفف في الرد على هذه المواقف المخجلة، وفي هذا التوقيت، والظروف الحالية، ونكتفي بالقول بأننا لن نهبط الى هذا المستوى المتدني في الوطنية، والشهامة، والدفاع عن جميع أبناء الشعب اللبناني الذي تقول هذه الدولة انها تمثله وتنطق بإسمه.</h4>
+		<a href="https://www.raialyoum.com/%d9%87%d9%84-%d8%b3%d9%8a%d8%b0%d9%87%d8%a8-%d8%a7%d9%84%d9%88%d9%81%d8%af-%d8%a7%d9%84%d8%a5%d9%8a%d8%b1%d8%a7%d9%86%d9%8a-%d8%a7%d9%84%d9%89-%d8%a7%d8%b3%d9%84%d8%a7%d9%85-%d8%a7%d8%a8%d8%a7%d8%af/print/" title="Print This Post" rel="nofollow"><img class="WP-PrintIcon" src="https://www.raialyoum.com/wp-content/plugins/wp-print/images/printer_famfamfam.gif" alt="Print This Post" title="Print This Post" style="border: 0px;" /></a>
+<h3 style="color: red;">
+ندرك جيدا أنه لا يستطيع الجميع دفع ثمن تصفح الصحف في الوقت الحالي، ولهذا قررنا إبقاء صحيفتنا الإلكترونية "راي اليوم" مفتوحة للجميع؛ وللاستمرار في القراءة مجانا نتمنى عليكم دعمنا ماليا للاستمرار والمحافظة على استقلاليتنا، وشكرا للجميع
+للدعم:
+</h3>
+<div >
+<form target='_blank' action='https://www.paypal.com/cgi-bin/webscr' method='post'><input type='hidden' name='cmd' value='_donations' /><input type='hidden' name='business' value='LD9SMZ4SJ3PE2' /><input type='hidden' name='item_name' value='support us' /><input type='hidden' name='item_number' value='' /><input type='hidden' name='currency_code' value='USD' /><input type='hidden' name='amount' id='amount_b35144d8afecc12d589c942a7641d6b2' value='' /><input type='hidden' name='no_note' value='1'><input type='hidden' name='no_shipping' value='1'><input type='hidden' name='notify_url' value='https://www.raialyoum.com/wp-admin/admin-post.php?action=add_wpedon_button_ipn'><input type='hidden' name='lc' value='EN_US'><input type='hidden' name='bn' value='WPPlugin_SP'><input type='hidden' name='return' value='' /><input type='hidden' name='cancel_return' value='' /><input class='wpedon_paypalbuttonimage' type='image' src='https://www.raialyoum.com/wp-content/uploads/2021/06/2021-06-30_22-38-59_155887.jpg' border='0' name='submit' alt='Make your payments with PayPal. It is free, secure, effective.' style='border: none;'><img alt='' border='0' style='border:none;display:none;' src='https://www.paypal.com/EN_US/i/scr/pixel.gif' width='1' height='1'></form>
+</div>
+
+        </div>
+		
+		
+					
+					
+        </div>
+
+<!-- <center><iframe src="/tahaendarticle.htm" width="650" height="650" frameBorder="0" scrolling="no"></iframe></center> -->
+
+
+
+        <footer>
+                        
+            <div class="td-post-source-tags">
+                                            </div>
+
+            <div class="td-post-sharing td-post-sharing-bottom td-with-like"><span class="td-post-share-title">مشاركة</span>
+            <div class="td-default-sharing">
+	            <a class="td-social-sharing-buttons td-social-facebook" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.raialyoum.com%2F%25d9%2587%25d9%2584-%25d8%25b3%25d9%258a%25d8%25b0%25d9%2587%25d8%25a8-%25d8%25a7%25d9%2584%25d9%2588%25d9%2581%25d8%25af-%25d8%25a7%25d9%2584%25d8%25a5%25d9%258a%25d8%25b1%25d8%25a7%25d9%2586%25d9%258a-%25d8%25a7%25d9%2584%25d9%2589-%25d8%25a7%25d8%25b3%25d9%2584%25d8%25a7%25d9%2585-%25d8%25a7%25d8%25a8%25d8%25a7%25d8%25af%2F" onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i class="td-icon-facebook"></i><div class="td-social-but-text">Facebook</div></a>
+	            <a class="td-social-sharing-buttons td-social-twitter" href="https://twitter.com/intent/tweet?text=%D9%87%D9%84+%D8%B3%D9%8A%D8%B0%D9%87%D8%A8+%D8%A7%D9%84%D9%88%D9%81%D8%AF+%D8%A7%D9%84%D8%A5%D9%8A%D8%B1%D8%A7%D9%86%D9%8A+%D8%A7%D9%84%D9%89+%E2%80%9C%D8%A7%D8%B3%D9%84%D8%A7%D9%85+%D8%A7%D8%A8%D8%A7%D8%AF%E2%80%9D+%D9%84%D9%84%D9%82%D8%A7%D8%A1+%D9%86%D8%B8%D9%8A%D8%B1%D9%87+%D8%A7%D9%84%D8%A3%D9%85%D8%B1%D9%8A%D9%83%D9%8A+%D8%A8%D8%B9%D8%AF+%D9%85%D8%AC%D8%B2%D8%B1%D8%A9+%D9%84%D8%A8%D9%86%D8%A7%D9%86%D8%9F+%D9%88%D9%84%D9%85%D8%A7%D8%B0%D8%A7+%D8%A3%D9%82%D8%AF%D9%85+%D9%86%D8%AA%D9%86%D9%8A%D8%A7%D9%87%D9%88+%D8%B9%D9%84%D9%8A%D9%87%D8%A7+%D8%A8%D8%B9%D8%AF+%D8%B3%D8%A7%D8%B9%D8%A7%D8%AA+%D9%85%D9%86+%D9%88%D9%82%D9%81+%D8%A7%D8%B7%D9%84%D8%A7%D9%82+%D8%A7%D9%84%D9%86%D8%A7%D8%B1%D8%9F+%D9%88%D9%83%D9%8A%D9%81+%D8%AC%D8%A7%D8%A1+%D8%B1%D8%AF+%E2%80%9C%D8%AD%D8%B2%D8%A8+%D8%A7%D9%84%D9%84%D9%87%E2%80%9D+%D8%A7%D9%84%D8%B5%D8%A7%D8%B1%D9%88%D8%AE%D9%8A+%D8%A7%D9%84%D8%B3%D8%B1%D9%8A%D8%B9+%D8%B5%D8%A7%D8%AF%D9%85%D8%A7+%D9%84%D8%A5%D8%B3%D8%B1%D8%A7%D8%A6%D9%8A%D9%84+%D9%88%D8%A7%D9%85%D8%B1%D9%8A%D9%83%D8%A7+%D9%85%D8%B9%D8%A7%D8%9F&url=https%3A%2F%2Fwww.raialyoum.com%2F%25d9%2587%25d9%2584-%25d8%25b3%25d9%258a%25d8%25b0%25d9%2587%25d8%25a8-%25d8%25a7%25d9%2584%25d9%2588%25d9%2581%25d8%25af-%25d8%25a7%25d9%2584%25d8%25a5%25d9%258a%25d8%25b1%25d8%25a7%25d9%2586%25d9%258a-%25d8%25a7%25d9%2584%25d9%2589-%25d8%25a7%25d8%25b3%25d9%2584%25d8%25a7%25d9%2585-%25d8%25a7%25d8%25a8%25d8%25a7%25d8%25af%2F&via=raialyoum1"><i class="td-icon-twitter"></i><div class="td-social-but-text">Twitter</div></a>
+	            
+				<a style="" href="https://www.linkedin.com/shareArticle?title=%D9%87%D9%84+%D8%B3%D9%8A%D8%B0%D9%87%D8%A8+%D8%A7%D9%84%D9%88%D9%81%D8%AF+%D8%A7%D9%84%D8%A5%D9%8A%D8%B1%D8%A7%D9%86%D9%8A+%D8%A7%D9%84%D9%89+%E2%80%9C%D8%A7%D8%B3%D9%84%D8%A7%D9%85+%D8%A7%D8%A8%D8%A7%D8%AF%E2%80%9D+%D9%84%D9%84%D9%82%D8%A7%D8%A1+%D9%86%D8%B8%D9%8A%D8%B1%D9%87+%D8%A7%D9%84%D8%A3%D9%85%D8%B1%D9%8A%D9%83%D9%8A+%D8%A8%D8%B9%D8%AF+%D9%85%D8%AC%D8%B2%D8%B1%D8%A9+%D9%84%D8%A8%D9%86%D8%A7%D9%86%D8%9F+%D9%88%D9%84%D9%85%D8%A7%D8%B0%D8%A7+%D8%A3%D9%82%D8%AF%D9%85+%D9%86%D8%AA%D9%86%D9%8A%D8%A7%D9%87%D9%88+%D8%B9%D9%84%D9%8A%D9%87%D8%A7+%D8%A8%D8%B9%D8%AF+%D8%B3%D8%A7%D8%B9%D8%A7%D8%AA+%D9%85%D9%86+%D9%88%D9%82%D9%81+%D8%A7%D8%B7%D9%84%D8%A7%D9%82+%D8%A7%D9%84%D9%86%D8%A7%D8%B1%D8%9F+%D9%88%D9%83%D9%8A%D9%81+%D8%AC%D8%A7%D8%A1+%D8%B1%D8%AF+%E2%80%9C%D8%AD%D8%B2%D8%A8+%D8%A7%D9%84%D9%84%D9%87%E2%80%9D+%D8%A7%D9%84%D8%B5%D8%A7%D8%B1%D9%88%D8%AE%D9%8A+%D8%A7%D9%84%D8%B3%D8%B1%D9%8A%D8%B9+%D8%B5%D8%A7%D8%AF%D9%85%D8%A7+%D9%84%D8%A5%D8%B3%D8%B1%D8%A7%D8%A6%D9%8A%D9%84+%D9%88%D8%A7%D9%85%D8%B1%D9%8A%D9%83%D8%A7+%D9%85%D8%B9%D8%A7%D8%9F&url=https%3A%2F%2Fwww.raialyoum.com%2F%25d9%2587%25d9%2584-%25d8%25b3%25d9%258a%25d8%25b0%25d9%2587%25d8%25a8-%25d8%25a7%25d9%2584%25d9%2588%25d9%2581%25d8%25af-%25d8%25a7%25d9%2584%25d8%25a5%25d9%258a%25d8%25b1%25d8%25a7%25d9%2586%25d9%258a-%25d8%25a7%25d9%2584%25d9%2589-%25d8%25a7%25d8%25b3%25d9%2584%25d8%25a7%25d9%2585-%25d8%25a7%25d8%25a8%25d8%25a7%25d8%25af%2F"><i class="td-icon-linkedin"></i></a>
+	           
+	            <a class="td-social-sharing-buttons td-social-whatsapp" href="whatsapp://send?text=%D9%87%D9%84+%D8%B3%D9%8A%D8%B0%D9%87%D8%A8+%D8%A7%D9%84%D9%88%D9%81%D8%AF+%D8%A7%D9%84%D8%A5%D9%8A%D8%B1%D8%A7%D9%86%D9%8A+%D8%A7%D9%84%D9%89+%E2%80%9C%D8%A7%D8%B3%D9%84%D8%A7%D9%85+%D8%A7%D8%A8%D8%A7%D8%AF%E2%80%9D+%D9%84%D9%84%D9%82%D8%A7%D8%A1+%D9%86%D8%B8%D9%8A%D8%B1%D9%87+%D8%A7%D9%84%D8%A3%D9%85%D8%B1%D9%8A%D9%83%D9%8A+%D8%A8%D8%B9%D8%AF+%D9%85%D8%AC%D8%B2%D8%B1%D8%A9+%D9%84%D8%A8%D9%86%D8%A7%D9%86%D8%9F+%D9%88%D9%84%D9%85%D8%A7%D8%B0%D8%A7+%D8%A3%D9%82%D8%AF%D9%85+%D9%86%D8%AA%D9%86%D9%8A%D8%A7%D9%87%D9%88+%D8%B9%D9%84%D9%8A%D9%87%D8%A7+%D8%A8%D8%B9%D8%AF+%D8%B3%D8%A7%D8%B9%D8%A7%D8%AA+%D9%85%D9%86+%D9%88%D9%82%D9%81+%D8%A7%D8%B7%D9%84%D8%A7%D9%82+%D8%A7%D9%84%D9%86%D8%A7%D8%B1%D8%9F+%D9%88%D9%83%D9%8A%D9%81+%D8%AC%D8%A7%D8%A1+%D8%B1%D8%AF+%E2%80%9C%D8%AD%D8%B2%D8%A8+%D8%A7%D9%84%D9%84%D9%87%E2%80%9D+%D8%A7%D9%84%D8%B5%D8%A7%D8%B1%D9%88%D8%AE%D9%8A+%D8%A7%D9%84%D8%B3%D8%B1%D9%8A%D8%B9+%D8%B5%D8%A7%D8%AF%D9%85%D8%A7+%D9%84%D8%A5%D8%B3%D8%B1%D8%A7%D8%A6%D9%8A%D9%84+%D9%88%D8%A7%D9%85%D8%B1%D9%8A%D9%83%D8%A7+%D9%85%D8%B9%D8%A7%D8%9F%20-%20https%3A%2F%2Fwww.raialyoum.com%2F%25d9%2587%25d9%2584-%25d8%25b3%25d9%258a%25d8%25b0%25d9%2587%25d8%25a8-%25d8%25a7%25d9%2584%25d9%2588%25d9%2581%25d8%25af-%25d8%25a7%25d9%2584%25d8%25a5%25d9%258a%25d8%25b1%25d8%25a7%25d9%2586%25d9%258a-%25d8%25a7%25d9%2584%25d9%2589-%25d8%25a7%25d8%25b3%25d9%2584%25d8%25a7%25d9%2585-%25d8%25a7%25d8%25a8%25d8%25a7%25d8%25af%2F" ><i class="td-icon-whatsapp"></i></a>
+            </div><div class="td-classic-sharing"><ul><li class="td-classic-facebook"><iframe frameBorder="0" src="https://www.facebook.com/plugins/like.php?href=https://www.raialyoum.com/%d9%87%d9%84-%d8%b3%d9%8a%d8%b0%d9%87%d8%a8-%d8%a7%d9%84%d9%88%d9%81%d8%af-%d8%a7%d9%84%d8%a5%d9%8a%d8%b1%d8%a7%d9%86%d9%8a-%d8%a7%d9%84%d9%89-%d8%a7%d8%b3%d9%84%d8%a7%d9%85-%d8%a7%d8%a8%d8%a7%d8%af/&amp;layout=button_count&amp;show_faces=false&amp;width=105&amp;action=like&amp;colorscheme=light&amp;height=21" style="border:none; overflow:hidden; width:105px; height:21px; background-color:transparent;"></iframe></li></ul></div></div>                        <div class="td-author-name vcard author" style="display: none"><span class="fn"><a href="https://www.raialyoum.com/author/mona/">06</a></span></div>	        <span style="display: none;" itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="06"></span><meta itemprop="datePublished" content="2026-04-09T15:30:22+00:00"><meta itemprop="dateModified" content="2026-04-09T23:05:08+00:00"><meta itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage" itemid="https://www.raialyoum.com/%d9%87%d9%84-%d8%b3%d9%8a%d8%b0%d9%87%d8%a8-%d8%a7%d9%84%d9%88%d9%81%d8%af-%d8%a7%d9%84%d8%a5%d9%8a%d8%b1%d8%a7%d9%86%d9%8a-%d8%a7%d9%84%d9%89-%d8%a7%d8%b3%d9%84%d8%a7%d9%85-%d8%a7%d8%a8%d8%a7%d8%af/"/><span style="display: none;" itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><span style="display: none;" itemprop="logo" itemscope itemtype="https://schema.org/ImageObject"><meta itemprop="url" content=""></span><meta itemprop="name" content="رأي اليوم"></span><meta itemprop="headline " content="هل سيذهب الوفد الإيراني الى &quot;اسلام اباد&quot; للقاء نظيره الأمريكي بعد مجزرة لبنان؟ ولماذا أقدم نتنياهو عليها بعد ساعات من وقف اطلاق النار؟ وكيف جاء رد &quot;حزب الله&quot; الصاروخي السريع صادما لإسرائيل وامريكا معا؟"><span style="display: none;" itemprop="image" itemscope itemtype="https://schema.org/ImageObject"><meta itemprop="url" content="https://www.raialyoum.com/wp-content/uploads/2026/04/2026-04-09_15-29-47_157043.jpg"><meta itemprop="width" content="409"><meta itemprop="height" content="348"></span>        </footer>
+
+    </article> <!-- /.post -->
+
+    
+			
+
+
+
+ 
+
+<center>الاعلانات</center>
+<!-- /217464089/RY-300x250-Bottom-MPU-->
+<center><div id='div-gpt-ad-1526443718830-8' style='min-width: 300px; min-height: 250px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1526443718830-8'); });
+  </script>
+</div></center>
+
+	<div class="comments" id="comments">
+        
+            <div class="td-comments-title-wrap td_block_template_1">
+                <h4 class="td-comments-title block-title"><span>46 تعليقات</span></h4>
+            </div>
+
+		        <ol class="comment-list ">
+                            <li class="comment " id="comment-3064388">
+			<article>
+	            <footer>
+                                        <cite>خرداد</cite>
+
+                    <a class="comment-link" href="#comment-3064388">
+                        <time pubdate="1775826371">Today at 1:06 pm (7 minutes ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>مبروك النصر المبين ياسيد عطوان … والى انتصارات آخرى في شمال ايران وجنوب لبنان وغرب اليمن وشرق العراق …</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064388">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064387">
+			<article>
+	            <footer>
+                                        <cite>Anonymous</cite>
+
+                    <a class="comment-link" href="#comment-3064387">
+                        <time pubdate="1775826125">Today at 1:02 pm (11 minutes ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>مهابيل  سلطة لبنان اذا استجابت لنداء المجرم الحرب نتن ياهو و تذهب لتفاوضه  .</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064387">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064381">
+			<article>
+	            <footer>
+                                        <cite>الصواعق</cite>
+
+                    <a class="comment-link" href="#comment-3064381">
+                        <time pubdate="1775823744">Today at 12:22 pm (51 minutes ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>المتوقع ان تقوم ايران بقصف اسرائيل بصواريخ مهولة انتقاما من جرائم العدو الاسرائيلي على شعب لبنان  وقتل 300 لبناني مدني .</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064381">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064377">
+			<article>
+	            <footer>
+                                        <cite>الشعب اللبناني الوطني</cite>
+
+                    <a class="comment-link" href="#comment-3064377">
+                        <time pubdate="1775822954">Today at 12:09 pm (1 hour ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>لا يحق لنواف سلام التفاوض مع العدو الاسرائيلي الارهابي بدون تفويض من البرلمان اللبناني و الشعب اللبناني في الجنوب ذو الغالبية ايضا ممثلا في حزب الله و امل .</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064377">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064374">
+			<article>
+	            <footer>
+                                        <cite>Anonymous</cite>
+
+                    <a class="comment-link" href="#comment-3064374">
+                        <time pubdate="1775822479">Today at 12:01 pm (1 hour ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>IRAN ONLY WHO PAY PRICE AFTER 45 YEARS OF WEST SANCTIONS &amp; AGGRESSIONS NOT PAKISTAN , TURKEY OR EGYPT OR SAUDI “ DOUBLE FACE “ REGIMES OR OTHERS WHO TRUMP PUSH THEM TO OBEY HIS DEVIL PLOTS AGAINST IRAN &amp; ISLAM .</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064374">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064358">
+			<article>
+	            <footer>
+                                        <cite>الحزم الايراني</cite>
+
+                    <a class="comment-link" href="#comment-3064358">
+                        <time pubdate="1775819301">Today at 11:08 am (2 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>يمكن لايران التركيز على شرطها لحماية محور المقاومة و حزب الله و شعبه وليس حماية القلة من عملاء اسرائيل في لبنان الضعفاء الذين لم يحموا الشعب اللبناني خلال سنتين ولا يستحقون لقب  “دولة “ .</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064358">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064351">
+			<article>
+	            <footer>
+                                        <cite>Anonymous</cite>
+
+                    <a class="comment-link" href="#comment-3064351">
+                        <time pubdate="1775818531">Today at 10:55 am (2 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>ايها العرب ، التائهين ، بين الحضوع و الاستسلام للهيمنة الصهيو ـ الامريكية ،</p>
+<p>لماذا تشككون دائما في مواقف ايران الصلبة الثي تتخذها في صراعها الوجودي ضد الغرب الكافر المتمثل في امريكا و حلفائهآ الاوروبيين  الانبرياليين  الذين احظروا الصهاينة الى فلسظين  ؟</p>
+<p>و اصبحتم ثشككون حتى في باكستان المستهدفة من طرف الصهاينة .</p>
+<p>اعلموا ان باكستان على الاقل  ليست مطبعة مع الكيان  الصهيوني كما هو  حال تركيا المطبعة.</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064351">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064344">
+			<article>
+	            <footer>
+                                        <cite>محور المقاومة الضارب</cite>
+
+                    <a class="comment-link" href="#comment-3064344">
+                        <time pubdate="1775817659">Today at 10:40 am (2 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>فلسطين  ستتحرر بهذا النوع من العمليات القتاليه الايرانية و المقاومة الضاربة و الكاسرة لرؤوس العدو الاسرائيلي الامريكي لانها ستستنزفهم و تحطمهم ثم تاتي الضربات الكبرى .</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064344">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064339">
+			<article>
+	            <footer>
+                                        <cite>رضوان</cite>
+
+                    <a class="comment-link" href="#comment-3064339">
+                        <time pubdate="1775816872">Today at 10:27 am (2 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>السلام عليكم . : &#8230; الحقيقة الواقِعية المُرة دون تجميلٍ دبلوماسي كاذبٍ : .. إنَّ الدولةَ اللبنانيةَ حالِيّاً مسلوبَةُ السيادةِ السياسية مِن اﻷميركي ( راعي مصالِحِهِ الخاصةِ فيها  )  و الإسرائيلي (  الذي يُريدُ الاستيلاء على ما يقدرُ عليه مِن أرضها  ) و الفرنسي ( راعي المسيحيين فيها ) و الإيراني ( راعي الشيعيينَ فيها  )   و السعودي (  راعي السنيينَ فيها  )   إلى أجلٍ غيرٍ مُسمى . معناهُ أنَّه حتَّى في حالِ طردِ النفوذِ السياسي الإيراني مِن الدولة اللبنانية ، فسبتقى حتما دولةً مسلوبةَ السيادةِ السياسيةِ مِن  اﻷميركي و الإسرائيلي و الفرنسي و السعودي . لكن لا شك في أنَّ السيادة السياسية اللبنانية لا يُمكن استعادتُها تدريجياً  إلا في حضورِ النفوذ السياسي الإيراني ، الذي هو اﻷحكم و  اﻷقل انتهازيةً بين جميعِ النافذين سياسياً في الدولة اللبنانية حالِيّاً  . &#8230;.</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064339">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064327">
+			<article>
+	            <footer>
+                                        <cite>صوت الضمير العربي</cite>
+
+                    <a class="comment-link" href="#comment-3064327">
+                        <time pubdate="1775815300">Today at 10:01 am (3 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>ان حكومة تتنكر لدماء أبناء شعبها و دمار بيوتهم و دمصادر<br />
+ لا يكون أن تكون حكومة تمثل شعبها و تحمي أرضه و مقدراته..أنها حكومةخانت  شعبها وسط غبار المعذرة و في  وقت يفرض عليها الواجب حماية الجبهة الداخلية و مكافحة أسباب الفرقة وةتقوية الجهبة  الداخلية و تجنيد كل مقدرات البلد خدمة للمعىكة الوجودية مع العدو الصهيوني لا ان تتماها  مع خطط العدو الصهيوني و مطالبه و مخططاته و تنهج نهجا طائفيا بغيضا قصير نظر يخدم مصالح العدو الصهيوني..فالحديد عن سلاخ المقاومة هو خيانة  وطنية عظ لا تغتفر.</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064327">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064320">
+			<article>
+	            <footer>
+                                        <cite>الباحث</cite>
+
+                    <a class="comment-link" href="#comment-3064320">
+                        <time pubdate="1775813377">Today at 9:29 am (3 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>المشكلة الحقيقية هي حكومة لبنان وخاصة عندما ققاف رىيس الحكومة لا احد يتفاوض عن لبنان ,وكا انه هناك اتفاق بين الصهيوامركي ورىيس الوزاء اللبناني .</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064320">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064317">
+			<article>
+	            <footer>
+                                        <cite>Anonymous</cite>
+
+                    <a class="comment-link" href="#comment-3064317">
+                        <time pubdate="1775812352">Today at 9:12 am (4 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>الاخ الكريم نصير المحترم تحية طيبة وبعد<br />
+بالفعل كثيرا من الأخوه الكرام قراء رأي اليوم وأنا منهم نشاهد هذا التنبيه المزعج فعلآ بصوره دائمه اتمنى ان تختفي تلك الطاهره قريبا</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064317">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064307">
+			<article>
+	            <footer>
+                                        <cite>taboukar</cite>
+
+                    <a class="comment-link" href="#comment-3064307">
+                        <time pubdate="1775809695">Today at 8:28 am (4 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>لبنان العظيم &#8230; مرشح ليتحول إلى&#8221; ريفييرا &#8221;<br />
+الشرق الاوسط &#8230;<br />
+ بعد ترحيل &#8221; شعوبه &#8221; إلى ارض الله واسعة</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064307">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064304">
+			<article>
+	            <footer>
+                                        <cite>Anonymous</cite>
+
+                    <a class="comment-link" href="#comment-3064304">
+                        <time pubdate="1775809352">Today at 8:22 am (4 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>لبنان العظيم &#8230; هو الاخر</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064304">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064303">
+			<article>
+	            <footer>
+                                        <cite>غاندي ناصر</cite>
+
+                    <a class="comment-link" href="#comment-3064303">
+                        <time pubdate="1775809298">Today at 8:21 am (4 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>عميد الصحافة الفلسطينية والعربية الأستاذ الكبير والأخ العزيز &#8221; عبدالياري عطوان &#8221; &#8230;&#8230;سلام الله .</p>
+<p>التاريخ وبقوة يعود وبوتيرة عالية إلى ماقبل الحداثة إلى الإستعمار والكولونيالية في ظل السقوط المدوّي لمؤسسلت القانون الدولي وعُريٍ فاضح للمؤسسات<br />
+الدولية المنبثقة عنه, وحالة الأستعمار المقنّع التي كانت سائدة,.بات كُلُّ شيء مكشوف وواضح لا لَبّسَ فيه بعد أنّ عرّت وفضحت معركة السابع من تشرين<br />
+ أوْل 2023 في &#8220;غزة &#8221; المنظومتين &#8221; الدولية والعربية &#8221; ووضعت العالم الإسلامي أمام حقيقته رديئة بعد أن خذل غزة وأطفال غزة و.يتباكى العالم الآن على<br />
+ إرتفاع برميل النفط  &#8221; نفطٌ بلوّن الدم &#8220;؟؟</p>
+<p>#_كيف وقف العالم صامتًا متخاذلاً ولا زال يقف عاجز خانع أمام عذابات الشعب الفلسطيتي .؟ ويتكلمون عن السلام والحقوق والواجب والفرض<br />
+ .حركة التاريخ سيّدي تدور بوتيرة عالية هناك فواتير واستحقاقات تاريخية وحقوق يجب على العالم أن يدفعها وبأثر رجعي وإلَّا سسيبقى الجميع يدور<br />
+ في حلقة مفرغة لا يوجد هزيمة دائمة .شعوب الأمة الآن هو من سيقف أما هذه العجرفة وأمام الغزاة نعم &#8221; الغُزاة لا تعريف آخر لذالك إلَّا انهم قوى<br />
+ غازية وغزاة تاريخيون .؟ في هذا البقعة من الجغرافية الّتي لازالت تدفع من دمائها ضريبة تاريخية.؟  لرفاهية &#8220;المواطن الغربي&#8221;.؟ </p>
+<p>أمَّا فيما يخص الملف اللبناني نعم لا زال التاريح حاضر وبقوة ربما تغيرت الأسماء والوجوه ولكن لا زال هناك طيف &#8220;اليمين اللبناني الأنعزالي&#8221; حاضرٍ<br />
+وبقوة في إدارة المشهداللبناني أمام محاولات محمومة ويائسة لإقتلاع الحركة الوطنية اللبنانية التاريخية ورموزها  التي دفعت ولازالت تدفع وتدافع عن<br />
+ لبنان الجغرافية والتاريخ ة والحضارة والسيادة الوطنية والهوية اللبنانية العربية .؟!</p>
+<p>ما نراه ونعيشه من مخرجاتٍ رخيصة صادرةٌ عن من يديروا المشهد &#8221; اللبناني &#8221; فلم يختلف كثيرًا ؟ المشهد لا زال طيف مجرم الحرب &#8221; ب .الجميّل &#8221;<br />
+ وبقوة مهما زينوا المفردات ودموع نجسة رخيصة,.ما نعيشه الليوْم في لبنان هو مؤامرة على&#8221; الحركة الوطنية اللبنانيةالتاريخية&#8221;  ورموزها؟!  تطبيع<br />
+ رخيص وعلني ومفاوضات مباشرة مع كيان العدو في وقتٍ ينزف فيه الجسد اللبناني والمواطن اللبناني فهذه علامة استفهام كبيرة ؟؟؟ فمن يكتب التاريخ<br />
+ سيّدي الآن في للبنان والأقليم كامل .. &#8220;رحم الله كمال جنبلاط ورشيد كرامة &#8221; وعاش لبنان العربي .</p>
+<p>حركة التاريخ تدور بوتيرةٍ عالية ولا بد من تسديد فواتير واستحقاقات تاريخية فعلى العالم الغربي والقوى الغازية أن تعيها جيدًا.قبل الحديث عن هموم<br />
+ المواطن الغربي هناك شعوب تتالنم وتتعذب منذ 100 سنة لابد من حصولها على حقوقها العادلة &#8230;&#8230;&#8230;&#8230;.هذه هو &#8220;السلام العادل &#8221;</p>
+<p>#_كعربي فلسطيني أؤكد على أنني سأبقى إلى الجانب المشرق من التاريخ الذي اختاره الأستاذ &#8220;عبدالباري عطوان &#8221; حتى لو أخطأ يوْمًا على أن<br />
+ أكون بجانب من اختاروا الجانب المُعتم من التاريخ وإن كانوا يوْمًا على صواب؟</p>
+<p>.</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064303">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064294">
+			<article>
+	            <footer>
+                                        <cite>taboukar</cite>
+
+                    <a class="comment-link" href="#comment-3064294">
+                        <time pubdate="1775808036">Today at 8:00 am (5 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>ها هو &#8221; جحر &#8221; غزة ينعقد في باكستان<br />
+فهل سيلدغ الإيرانيين من نفس الجحر ؟<br />
+ام لكل مقام &#8230; لدغ  ؟!</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064294">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064276">
+			<article>
+	            <footer>
+                                        <cite>نصير ...</cite>
+
+                    <a class="comment-link" href="#comment-3064276">
+                        <time pubdate="1775803041">Today at 6:37 am (6 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>كتب وزير الفاع الباكستاني خواجه آصف، في منشور على إكس:<br />
+&#8220;إسرائيل شر ولعنة على البشرية، فبينما تُجرى محادثات السلام في إسلام آباد، تُرتكب الإبادة الجماعية في لبنان&#8221;.<br />
+Israel is evil and a curse for humanity, while peace talks are underway in Islamabad, genocide is being committed in Lebanon. Innocent citizens are being killed by Israel, first Gaza, then Iran and now Lebanon, bloodletting continues unabated. I hope and pray people who created…<br />
+— Khawaja M. Asif (@KhawajaMAsif) April 9, 2026</p>
+<p>وأضاف: &#8220;يُقتل مواطنون أبرياء على يد إسرائيل، أولا في غزة، ثم إيران، والآن لبنان، ويستمر سفك الدماء بلا هوادة&#8221;.<br />
+واختتم منشوره بالقول: &#8220;أدعو الله أن يُعاقب من أنشأوا هذه الدولة السرطانية على أرض فلسطين للتخلص من اليهود الأوروبيين، وأن يُعاقبوا أشد العقاب.<br />
+على الجانب الاخر اصدر مكتب النتياهو ان انه لا يمكن التسامح مع هذه التصريحات.<br />
+الدول العربية الاسلامية وتركيا المسلمة واندونيسيا المسلمة لم يتجرأو على التنديد بالحرب والابادة الجماعية في غزة وقتل اكثر من 75 الف فلسطيني عدا عن المصابين والدمار الكبير والحرب على لبنان وايران واليمن.<br />
+اذا فُتح باب التطوع لتحرير فلسطين فأن عدد االمتطوعين النفرات من باكستان سيصل الى عشرات الملايين المستعدين لقتال الصهاينة وبالنسبة للشعوب العربية يمكنهم مشاهدة معارك التحرير في فلسطين على قناة الجزيرة من بيوتهم.</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064276">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064271">
+			<article>
+	            <footer>
+                                        <cite>ماجد بن اسماعيل ..</cite>
+
+                    <a class="comment-link" href="#comment-3064271">
+                        <time pubdate="1775801076">Today at 6:04 am (7 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>صمود العرب وتحديدا دول الخليج العربية واكثر دقة بقيادة سعودية<br />
+حتى ولو كان البعض يراه صمودا لا يرقى الى المستوى المطلوب لكن<br />
+وهنا نؤكد على لكن .. الرسالة وصلت وهي الاهم على الاطلاق من التدمير<br />
+الذي احدثته الحرب في العالم العربي والاسلامي ..<br />
+نعم الرسالة وصلت لاسرائيل بان زوالها مطلب دولي .. فشعوب العالم كلها<br />
+اجمعت على ان هذا الكيان عظو فاسد يجب ان يبتر ..<br />
+اسرائيل ولأول مرة تفقد الامل في بقائها .. ليس من اعدائها بل من اصدقائها<br />
+وداعموها واولهم الشعب الامريكي والاوروبي ..<br />
+وعلى فكرة .. دول مثل روسيا والصين تدعم بقاء اسرائيل شوكة في حلق العالم<br />
+ العربي والاسلامي .. وحتى تورط امريكا وتدخلها في صراعات تعتبر ميدان لاختبار<br />
+مدى قدرة امريكا الاحتفاظ بالتفوق التقني ..<br />
+وعلى فكرة مرة اخرى .. وبلغة مبسطة .. فيه دول عربية .. مصر والاردن والمغرب مثلا ..<br />
+ تعتاش على مشكلة فلسطين وتريد بقائها بل استعارها حتى تلتفت لها الانضار ..<br />
+وحتى ايران .. تعتبر فلسطن ميدان تفرض منها هيبتها على العرب .. وهذا ما حدث ويحدث ..</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064271">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064268">
+			<article>
+	            <footer>
+                                        <cite>نصير ...</cite>
+
+                    <a class="comment-link" href="#comment-3064268">
+                        <time pubdate="1775799753">Today at 5:42 am (7 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>السيدة مها بربار :<br />
+تظهر على الشاشة وعلى موقعكم فقط التنبيه المرفق بالاسفل ، هل بالامكان ازالته عن الموقع لانه يطغى على حيز من مساحة الشاشة، لقد حولت وسألت العديد المختصين الذين قالوا لي ان هذا الشريط هو من الموقع نفسه، هل بالامكان ازالته لانه يعيق القراءة وكتابة التعليقات.<br />
+You are seeing this message because ad or script blocking software is interfering with this page.<br />
+Disable any ad or script blocking software, then reload this page<br />
+يظهر هذا الشريط او التنبيه على موقعكم فقط بشكل دائم.</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064268">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064265">
+			<article>
+	            <footer>
+                                        <cite>9 - 10 نيسان</cite>
+
+                    <a class="comment-link" href="#comment-3064265">
+                        <time pubdate="1775799124">Today at 5:32 am (7 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>“في العاشر مِن نيسان نسيتُ على أبواب الأحواز حذائي!” (ليس له مِن اسمِه نصيب الشّاعر المُغاضب المُغادر والرّاحل معاً اللّا مُظفر النوّاب).<br />
+مِنبَر X الجُّمُعة، بالأرقام الرَّسميّة، ارتفعت حصيلة الهجمات الإسرائيليّة على لبنان بين 2 آذار و 9 نيسان= 1888 شهيد و6092 جريح، ونزوح نحو مليون و600 ألف مُواطن، وصف وزير دفاع الجُّمهوريّة الإسلاميّة الباكستانيّة النوويّة (خواجة محمد آصف): “إسرائيل شرّ ولعنة على الإنسانيّة” بالحرف الواحد اللّاتيني: Israel is evil and a curse for humanity, while peace talks are underway in Islamabad, genocide is being committed in Lebanon. Innocent citizens are being killed by Israel, first Gaza, then Iran and now Lebanon, bloodletting continues unabated. I hope and pray people who created. مصادر Victor إعلاميّة أفادت بإنذار أخير An ultimatum Sources، مِثل وَكالة Reuters الخبريّة ومَجَلَّة “المِرآة Der Spiegel” الألمانيّة: تنادي لكبح مُساعدات إيران ببـِدعة جباية هرمز؛ على سبيل المثال، استخدام زوارق كاسحات الألغام Minesweepers. الجّار وراء كواليس استحصال النسيئة، والجّاري دور الصّين الرَّصين لوقف إطلاق النّار.<br />
+وَكالة AFP الفرنسيّة عشيّة الجُّمُعة؛ بيانات خدمة المراقبة البحرية MarineTraffic: “السُّفن العشر المُبشَّرة بعبور مضيق هرمز بدخول وقف إطلاق النار في الشَّرق الأوسط حيّز التنفيذ”.</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064265">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064239">
+			<article>
+	            <footer>
+                                        <cite>Libnan</cite>
+
+                    <a class="comment-link" href="#comment-3064239">
+                        <time pubdate="1775784800">Today at 1:33 am (11 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>Hormuz is the choke point for the whole world Trump knows it and felt it . Nitin thinks he can achieve Gaza in Lebanon he will be dead before that . It is law of the jungle Lebanese gulf gov is a weak comparse vassal  the Zionist saying they want annex Lebanon you negotiate on what ?? On surrender terms Lebanon is a jungle of fighters think the Zionist needs to be reminded but this time no sunbathers in tel Aviv. You want nitin to stop blow up gas fields the American companies running these fields will be very happy.</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064239">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064235">
+			<article>
+	            <footer>
+                                        <cite>اصوات الشعوب</cite>
+
+                    <a class="comment-link" href="#comment-3064235">
+                        <time pubdate="1775783477">Today at 1:11 am (12 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>تريليون تحية الى حزب الله الوطني من الشعوب على ضرباته المستمرة على العدو الاسرائيلي المجرم ردا على جرائمه ضد مدنيي بيروت و لبنان .. لقد شفى حزب الله غليل الشعوب .</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064235">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064233">
+			<article>
+	            <footer>
+                                        <cite>IMPACT</cite>
+
+                    <a class="comment-link" href="#comment-3064233">
+                        <time pubdate="1775782618">Today at 12:56 am (12 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>CEASEFIRE IN PAKISTAN IS A TRICK NOT  A REAL PEACE PLAN .. USA EVIL REGIME ALWAYS USE SATANIC DEVIL TACTICS SUCH AS THE STUPID containment policy  WHICH IS TO TURN AROUND  MANUVERING TO DECIEVE THE OTHER PARTY &amp; LIE UTILISING HIS AGENTS MEMBERS IN DISCUSSIONS TO FLOAT DEBATES AND WASTE TIMES  BY SAYING YES NO AT SAME TIME … THIS WHAT AMERICANS WILL DO IN PAKISTAN MEETING .  SECONDLY ,  ZIONIST KOSHNER , WITTKOV MUST NOT BE PRESENT . THIRD  , BETTER NOT TO LISTEN TO PAKISTAN MEDIATER BY SAYING TO IRAN “ UTILISE THE CHANCE “ OR “WAIT AND SEE TRUMP OBLIGATIONS / ACTIONS” ETC BLAA ..BLAA.. BLAA WHICH LED TO KILL 250 LEBANESE CIVILIANS WITH NO PUNISHMENT , AND HE SHOULD ONLY LISTEN ONLY &amp; NOT TO INTERFERE TO PROTECT / MARKET  TRUMP / NETANYAHU . IN CONCLUSION WITHOUT TRUMP CLEAR ACCEPTANCE IN WRITING ON FULL IRAN 10 CONDITIONS .. NO COMPROMISE . FOURTH , LEBANESE REGIME ATTENDENCE IN PAKISTAN MEETING IS STRANGE WHILE HE KEPT SILENT DURING 40 DAYS OF TRUMP AGGRESSION ON IRAN / LEBANON  . AND NOW MOVING FOR NOTHING . IRAN STIPULATION TO INCLUDE HEZBULLAH IN ANY CEASE FIRE TO PROTECT LEGAL RESISTANCE NOT TO GO WITH NAWAF SALAM SURRENDER TO ISRAEL /TRUMP .</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064233">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064231">
+			<article>
+	            <footer>
+                                        <cite>Anonymous</cite>
+
+                    <a class="comment-link" href="#comment-3064231">
+                        <time pubdate="1775781387">Today at 12:36 am (12 hours ago)</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>CEASEFIRE IN PAKISTAN IS A TRICK NOT  A REAL PEACE PLAN .. USA EVIL REGIME ALWAYS USE SATANIC DEVIL TACTICS SUCH AS THE STUPID containment policy  WHICH IS TO TURN AROUND  MANUVERING TO DECIEVE THE OTHER PARTY &amp; LIE UTILISING HIS AGENTS MEMBERS IN DISCUSSIONS TO FLOAT DEBATES AND WASTE TIMES  BY SAYING YES NO AT SAME TIME … THIS WHAT AMERICANS WILL DO IN PAKISTAN MEETING .  SECONDLY ,  ZIONIST KOSHNER , WITTKOV MUST NOT BE PRESENT . THIRD  , BETTER NOT TO LISTEN TO PAKISTAN MEDIATER BY SAYING TO IRAN “ UTILISE THE CHANCE “ OR “WAIT AND SEE TRUMP OBLIGATIONS / ACTIONS” ETC BLAA ..BLAA.. BLAA WHICH LED TO KILL 250 LEBANESE CIVILIANS WITH NO PUNISHMENT , AND HE SHOULD ONLY LISTEN ONLY &amp; NOT TO INTERFERE TO PROTECT / MARKET  TRUMP / NETANYAHU . IN CONCLUSION WITHOUT TRUMP CLEAR ACCEPTANCE IN WRITING ON FULL 10 CONDITIONS .. NO COMPROMISE . FOURTH , LEBANESE REGIME ATTENDENCE IN PAKISTAN MEETING IS STRANGE WHILE HE KEPT SILENT DURING 40 DAYS OF TRUMP AGGRESSION ON IRAN . AND NOW MOVING FOR NOTHING . IRAN STIPULATION TO INCLUDE HEZBULLAH IN ANY CEASE FIRE TO PROTECT LEGAL RESISTANCE NOT TO GO WITH NAWAF SALAM SURRENDER TO ISRAEL /TRUMP .</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064231">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064206">
+			<article>
+	            <footer>
+                                        <cite>Anonymous</cite>
+
+                    <a class="comment-link" href="#comment-3064206">
+                        <time pubdate="1775776881">Yesterday at 11:21 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>فلسطين لن تتحرر بهذا النوع من العمليات القتاليه اي صدام جيوش نظاميه لمدة اسبوعين ثم الاستنجاد باطراف ثالثه للتدخل وايقاف القتال ثم اعادة الكره بعد شهر او شهرين ثم الاستنجاد بالاخرين للتدخل وايقاف القتال مرة اخرى . لا بل حتى ضاعت ونسيت قضية فلسطين ولم يعد احد يتذكرها بسبب كثرة التدخلات الجانبيه من الاخرين وفي خضم الاحداث المتسارعه. على الشعب الفلسطيني اخذ زمام المبادره بعد الاتكال على الله واتخاذ ما يلزم لتحرير بلده بنفسه وبالاساليب التي يختارها ويقدر على ادامتها ولو لالف سنه القادمه . واهم شئ النأي بنفسه عن مشاكل الاخرين . كل الشرائع السماويه والارضيه تعطيه هذا الحق في الدفاع عن ارضه وعرضه وماله وكل الشرفاء في العالم يدعمونه .</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064206">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064204">
+			<article>
+	            <footer>
+                                        <cite>زرقاء اليمامة</cite>
+
+                    <a class="comment-link" href="#comment-3064204">
+                        <time pubdate="1775774590">Yesterday at 10:43 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>حسنا ، يجب أن يعلم الخليج العربي والشرق الأوسط أن نظام إيران الذي كان ذات يوم يحلم الأمريكان والكيان الصهيوني بإسقاطه هو نفسه الذي يتجاوب مع العالم للتفاوض مع أمريكا . فالنظام في إيران لازال قاءما وحيا ! فليستمع الأمريكان والصهاينة إلى شروط &#8220;إيران أولا&#8221; وما يحدث بعد 15 يوما في حالة إفشال بني صهيون المفاوضات بين (إيران المتحدة والولايات المتحدة) . لكن رغم ذلك فإيران تحتفظ لنفسها بالحق في إتخاذ بادرة إنهاء الهدنة بإرادة منفردة عن طريق رفض وفد إيران الحضور رفضا باتا للقاء نظيره الأمريكي طالما أن أمريكا تخشى عدم نجاح المباحثات مع إيران لعلة تغيب الفريق الممثل لإيران ، ويرجع تخوف أمريكا من حصول المفاجأة الأخيرة للإعتبارات التالية ؛ من ناحية : أن الحرب على إيران التي بدأها الأمريكان ليس بالضرورة أن يكون هم من ينهونها بل  بات الآن حتما  من حق إيران أن تنهيها أو تنكت أي إتفاق بشأن إيقاف هجماتها وتواصل ضرباتها طالما أن الكيان لم يراع بنود إتفاق إيقاف إطلاق النار في شقه الذي يتعلق بلبنان . ومن ناحية ثانية ، أن هذه الحرب قد أصبحت مسؤولية من أكبر المسؤوليات ، وحمل كبير وثقيل جدا جدا على عاتق ترامب ينهكه ولاشك ، يتألم ولايشكو ، وبعد ذلك يرى في إيران أنه بذل قصارى جهده لتغيير النظام الإيراني بتربية وأدب أمريكي ، ويرى إيران التي تدك قواعده العسكرية من نفس  المنطقة التي تخضع للهيمنة الأمريكية منذ &#8220;عام الفيل&#8221;  شعور قاس لامحالة يجعله ساخطا على كل معاتب . فمعظم الرؤساء يحسبون أنفسهم معصومين من الخطأ ويرفضون أي إشارة قد توجه لهم ! فهم بحكم القدر- السلطة . وأصحاب السلطة لا بوجه لهم الإنتقاد أو إسداء النصح . هم الصواب ، فقط هم ، فترامب واحد من هؤلاء يرفض &#8220;الأسباب&#8221; ويخلط بينها وبين &#8221; المبررات&#8221; ، وصار ينتقم من إيران لنفسه بسبب شعوره بجرح في كرامته وإستغفال لهيبته. ويتقدم بوثيقة ملفوفة على عنق قذيفة حربية دون إعمال العقل فيما يبتغي أو حتى القلب فيما يمس حياة الأبرياء ! بل يتظاهر بشيء ويخفي أشياء ويرى ترامب نفسه العقل المدير للسلام يسوده من يستحق السيادة ، وكل من العالم العربي والإسلامي لايستحق، إلا هو مدى الحياة ! من الأفضل ، أن تخبره أنه &#8221; شخص جيد ومطلوب منه أن يفعل معجزة تجعل العالم لن ينسى ماقام به من خطأ&#8221; ليطلق رصاصة الرحمة على نفسه . من الأفضل أن تهوله وتعطيه أكبر من حجمه ، ضانا أنه يزرع الخوف من الحرب و ضانا أن العالم يفرح لفرحه ويحزن لحزنه  وضانا أنه المختار في الأرض ليحكم أن إيران لا تستحق أن تستمر فيها حضارة &#8220;سادت ثم زادت &#8221; وأن ( إسراءيل ) وحدها فقط تستحق أن يكون لها ما أرادت بل وتزداد كيل بعير .</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064204">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064201">
+			<article>
+	            <footer>
+                                        <cite>Anonymous</cite>
+
+                    <a class="comment-link" href="#comment-3064201">
+                        <time pubdate="1775773143">Yesterday at 10:19 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>IT IS POSSIBLE IRAN TO GO TO PAKISTAN MEETING BUT AT SAME TIME TO STRIKE ISRAEL WHO BREACHED CEASE FIRE &amp; THEY ARE RESPONSIBLE IN FRONT OR WORLD ..THIS IS IRAN RIGHT</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064201">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064200">
+			<article>
+	            <footer>
+                                        <cite>Anonymous</cite>
+
+                    <a class="comment-link" href="#comment-3064200">
+                        <time pubdate="1775773046">Yesterday at 10:17 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>THE PAKISTANI MEDIATER ( PRIME MINISTER ) MADE A BIG MISTAKE TO PROTECT ISRAEL FROM IRAN MISSILES WHICH WAS READY TO STRIKE ISRAEL AS RESPONSE TO 250 LEBANESE KILLED BY CRIMINAL ISRAEL &amp; 1100 WOUNDED .. WHY YOU DID SUCH DIRTY PROPOSAL IN FAVOUR OF TERRORISTS ISRAELIS .. YOU WILL BE CHARGED BY ISLAMIC PEOPLES .. DO NOT DO THAT AGAIN AND BE FAIR .. KILLERS MUST BE PUNISHED ..DO NOT INTERFERE WHILE YOUR WORK WAS WEAK &amp; TRUMP LAUGHED AT YOU AND DECIEVED YOU ..YOU DID A HORRIBLE MISTAKES ..STEP DOWN .. BUT IRAN WILL STRIKE ISRAEL SHORTLY .. LEBANESE BLOOD IS VALUABLE ..HEY UNDERSTAND YOU KNOW TRUMP IS NOT TRUSTWORTHY DESPITE THAT YOU PROPOSED TO IRAN NOT TO STRIKE .. NONSENSE . BUT HIZBULLAH STROKE ISRAEL STRONGLY DESPITE PAKISTAN MEDIATER SUSPECIOUS PROPOSAL</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064200">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064196">
+			<article>
+	            <footer>
+                                        <cite>ولد البلاد : # اي مفاوصات هذه ؟!</cite>
+
+                    <a class="comment-link" href="#comment-3064196">
+                        <time pubdate="1775772022">Yesterday at 10:00 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>في الواقع و المنطق يبقي السؤال مطروح مع من  ستنفاوض ايران و على اي موضوع  ستفاوض؟ </p>
+<p>و  العاقل يعرف تمام المعرفة ان ايران دولة  مستقلة ذات سيادة و داتةحضارة  عريقة  منذ آلاف السنين و ان الولايات الممتحدة  هي التي بدات حربا كونية عليها  بهدف اخضاعها  للهيمنة الصهيونية    ، مع العلم  تبقي المفاوضات    نوع من الحرب الناعمة لخداع اصحاب القرار الإيرانين   و كما  يقول  المثل الشعبي &#8221;  اللي ايجرب  المجرب عفل امخرب &#8221;<br />
+فيما يخص  المفواضات  المقترحة  بين  امريكا و الولايات  المتحدة  حزب  الله    احسن.الآختيار  لرفضها  ، لكن  تلك المفوضات  واضحة المعالم  و الاهداف  و هو  الحكومة اللبنانبة ستزود  الاعداء بالمعلومات الاستخباراتية عن حزب الله   ، و  رسم حطة  للقضاء عليه و لا سيما  إن لم تتدخل عاجلا ايران  لمساندته</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064196">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064192">
+			<article>
+	            <footer>
+                                        <cite>ولد البلاد :$</cite>
+
+                    <a class="comment-link" href="#comment-3064192">
+                        <time pubdate="1775771725">Yesterday at 9:55 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>في الواقع و المنطق يبقي السؤال مطروح مع من  ستنفاوض ايران و على اي موضوع  ستفاوض؟<br />
+و  العاقل يعرف تمام المعرفة ان ايران دولة  مستقلة ذات سيادة و داتةحضارة  عريقة  منذ آلاف السنين و ان الولايات الممتحدة  هي التي بدات حربا كونية عليها  بهدف اخضاعها  للهيمنة الصهيونية    ، مع العلم  تبقي المفاوضات    نوع من الحرب الناعمة لخداع اصحاب القرار الإيرانين   و كما  يقول  المثل الشعبي &#8221;  اللي ايجرب  المجرب عفل امخرب &#8221;<br />
+فيما يخص  المفواضات  المقترحة  بين  امريكا و الولايات  المتحدة  حزب  الله    احسن.الآختيار  لرفضها  ، لكن  تلك المفوضات  واضحة المعالم  و الاهداف  و هو  الحكومة اللبنانبة ستزود  الاعداء بالمعلومات الاستخباراتية عن حزب الله   ، و  رسم حطة  للقضاء عليه و لا سيما  إن لم تتدخل عاجلا ايران  لمساندته</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064192">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064159">
+			<article>
+	            <footer>
+                                        <cite>عزاوي</cite>
+
+                    <a class="comment-link" href="#comment-3064159">
+                        <time pubdate="1775764417">Yesterday at 7:53 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>الخوف ع الوفد الايراني من المفاوضات في اسلام اباد لانهم من اكبر العملاء للصهاينة والأمريكان ولا يأتي الخير من حكومة باكستان</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064159">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064139">
+			<article>
+	            <footer>
+                                        <cite>نصير ...</cite>
+
+                    <a class="comment-link" href="#comment-3064139">
+                        <time pubdate="1775760593">Yesterday at 6:49 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>نصر ام هزيمة<br />
+لا تتركوا لبنان وحيداً<br />
+اذا لم يتم الرد الانتقامي الفوري ومن جميع جبهات المقاومة الموحدة على مجزرة لبنان التي اقترفها الصهاينة فسيعتبر ذلك بالعرف الصهيوني نصر لهم وهزيمة لجبهة المقاومة.<br />
+متى كان الكيان يلتزم بوقف اطلاق النار ؟؟؟؟؟؟؟<br />
+الرد الانتقامي هو السبيل الوحيد لردع الصهاينة<br />
+لا تتركوا لبنان وحيداً<br />
+الحكومة اللبنانية تتخذ من الهجمات الصهيونية ذريعة للدخول في مفاوضات استسلام للصهاينة وتسليم حزب الله للصهاينة مع تقبيل احذيتهم.</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064139">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064127">
+			<article>
+	            <footer>
+                                        <cite>بلحرمة محمد المغرب</cite>
+
+                    <a class="comment-link" href="#comment-3064127">
+                        <time pubdate="1775758777">Yesterday at 6:19 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>استادنا الفاضل عبد الباري عطوان سلام الله عليكم ورحمته تعالى وبركاته وعلى طاقمكم الصحفي المحترم وعلى كل المقاومين للهيمنة الصهيوامريكية افرادا وجماعات وحركات ودولا وصحفيين وكتابا ومثقفين ومعلقين وعلى اهلنا في غزة والضفة الغربية وسائر فلسطين السليبة ولبنان والعراق واليمن البلد العربي المسلم الاصيل والجمهورية الاسلامية الايرانية التي صمدت صمودا اسطوريا في وجه برابرة العصر قتلة الاطفال والنساء والشيوخ فهل انتهى زمن البرابرة حقا؟ ولمادا يصدعون رؤوسنا عن هتلر وموسيليني؟ لمادا يتحدثون عن الحضارة والعالم الحر؟ لمادا يرفعون تمثال &#8211; الحرية &#8211; في سماء نيويورك وهم يقيدونها ويحاربونها؟ لمادا لا يتوقفون عن خداع الناس بشعاراتهم البالية كحقوق الانسان والديمقراطية وحقوق الطقل وغيرها من الترهات التي تبث بالدليل والحجة انهم هم من يدوسون عليها؟ لمادا تحرر وزارة الخارجية الامريكية محاضر حول حقوق الانسان عبر العالم وهي التي تنتهك هده الحقوق وحاضنتها الصهيونية المجرمة؟ ما الفائدة في وجود هده المؤسسات المسماة دولية وهي التي تساهم بشكل او باخر في عدم الاستقرار العالمي من خلال صمتها المطبق عن جرائم الويلات المتحدة وربيبتها الصهيونية السادية؟ لمادا يدافع الغرب بكل قوة عن جرائم العصابات الصهيونية ويعتبرها &#8211; دفاعا عن النفس &#8211; كما تابعنا في جرائم غزة التي ستلاحق المجرمين بايدن وترامب وفريقيهما المتطرف طوال حياتهم؟ من كان يزود العصابات الصهيونية بالاسلحة المتطورة الفتاكة؟ اليست امريكا زعيمة &#8211; العالم الحر &#8211; المزعوم والغرب التابع صاحب الشعارات البراقة الممزوجة بالسم الزعاف؟ لمادا صمت هدا الغرب المنافق عن جرائم امريكا والعصابات الصهيونية ضد ايران؟ لمادا حدى حدو امريكا في تنصله من الاتفاق النووي في عهدة البلطجي ترامب الاولى؟ الم يساهم هدا الغرب التابع في تازيم الاوضاع بدعمه لقرار البلطجي ترامب ونزولا عند رغبة العصابات الصهيونية بشن العدوان على ايران؟ هل فعلا تريد الويلات المتحدة التفاوض من اجل حل الخلافات العالقة مع ايران ام انها مجرد خدعة اخرى تستانف بعدها عدوانها لتحقيق اهدافها التي سطرتها مع العصابات الصهيونية بتعاون الغرب المنافق التابع وعبيدها في المنطقة؟ الا يتم ما يرتكبه النتن ياهو من مجازرضد اللبنانيين بضوء اخضر امريكي؟ اليس الوثوق في امريكا كمن يحسن الظن في الشيطان؟ لمادا لايريد العرب والاعراب والعربان ان يقرؤوا النص الوارد امامهم مرات عديدة وبتمعن &#8211; مادا تخطط الويلات المتحدة للعرب &#8211;  ليفهموه ويدركوا ما بين السطور ليحتاطوا من هدا الوحش القاتل قبل فوات الاوان؟</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064127">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064125">
+			<article>
+	            <footer>
+                                        <cite>طوفـــــــــــــــان الأقصى</cite>
+
+                    <a class="comment-link" href="#comment-3064125">
+                        <time pubdate="1775758696">Yesterday at 6:18 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>الرئيس اللبناني ورئيس حكومته في حالة ذعر. بعد أن وصفهم ضابط سابق في القوات الخاصة الأمريكية بأنهم عملاء للموساد، استحوذت هذه الحرب على تفكيرهم ولم يعودوا يعرفون إلى أي جانب ينحازون. فهل سيواصلون خدمة مصالح &#8220;إسرائيل&#8221; أم سيمثلون دور المسرحية الوطنية اللبنانية؟ إنهم في مأزق سياسي.<br />
+إدراكًا منه أن هذه هزيمة مخزية، لا سيما بعد الفشل الذريع لعملية أصفهان، تظاهر ترامب بالقبول بنقاط إيران العشر من أجل الاستعداد بشكل أفضل لعملية خداع اخرى…. بواسطة باكستان الذين سوف يستغلون بالتأكيد صدقها ورغبتها في إنهاء هذه الحرب. سوف لن يقع محور الجهاد والمقاومة في اي مكيدة بعدما تفطن إليها في الوقت المناسب. التذبذب الأمريكي جاء نتيجة استنزاف قدرات” الإسرائيليين “انه يشبه ما حدث في المواجهة السابقة التي وافقت على وقف إطلاق نارها على مضض القوات المسلحة الإيرانية. أما اليوم، فلم يعد الأمر كذلك.<br />
+الأمريكيون و&#8221;الإسرائيليون&#8221; في وضع حرج لكنهم يخفون ذلك بشكل سيئ بينما يبحثون بغطرسة من وراء الكواليس عن مخرج مشرف لن يجدوه بالتأكيد هذه المرة.</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064125">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064123">
+			<article>
+	            <footer>
+                                        <cite>طوفـــــــــــــــان الأقصى</cite>
+
+                    <a class="comment-link" href="#comment-3064123">
+                        <time pubdate="1775758215">Yesterday at 6:10 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>تراجع ترامب في الأمتار الأخيرة عن محوه للحضارة الإيرانية كان ينم عن غدر آخر، أضحى ذلك متوقعاً نظراً لاستحالة تحقيق ما كان دائما يصبو اليه، وطبيعته كرجل متقلب المجاز (تعود حالته هذه إلى عوامل نفسية، هرمونية، أو كيمياء الدماغ) يدير في الولايات المتحدة الأمريكية وكأنها &#8220;شركة تجارة ترامبية&#8221;.  بعض المستشارين المختلين سياسيا في البيت الأبيض المستفيدين يعتبرون أكاذيب رئيسهم ترامب، بمثابة حيل حربية لإرضائه، وكأن العالم أصبح ساذج إلى هذا الحد.<br />
+انتاب ترامب الغضب الشديد بعد الفشل الذي مُنيت به قوات &#8220;دلتا&#8221; خلال عمليتها الخاصة في إيران، والتي خسرت فيها أكثر من 10 طائرات، بالإضافة إلى خسائر بشرية أخرى لم يعلن عنها. في محاولة لرفع معنوياتهما بالتناوب، لم يتوقف ترامب ووزير حربه، في ظل إحباطهما، عن التباهي بأنهما قضيا على قدرات إيران، لكنهما يواصلان دون وعي تصويرهما لها على أنها إمكانات ما زالت تشكل خطر محتمل يتعين (مرة اخرى) القضاء عليها.</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064123">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064116">
+			<article>
+	            <footer>
+                                        <cite>نصير ...</cite>
+
+                    <a class="comment-link" href="#comment-3064116">
+                        <time pubdate="1775757540">Yesterday at 5:59 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>لقد اضعتم الفرصة الذهبية التي ستكسر الصهاينة وتضعهم عند حدهم ويتبلور جيش المقاومة.<br />
+لقد كان الأولى ان يتم دك الصهاينة بصواريخ ثقيلة ومدمرة رداً على العدوان على لبنان مباشرة ودون تردد، كان من الواجب الشرعي على جبهة المقاومة في ايران واليمن وحزب الله والحشد الشعبي الرد الفوري والصاعق دون الالتفات الى وقف النار او هدنة لان الكيان الصهيوني لا يعير اي هدنة اهتمام ولا يكترث بالمهادنين  اخشى ما اخشاه ان يتكرر نفس الاخطاء في السابق بعد اعلان الهدنة ووقف لاطلاق النار.<br />
+الى جبهة المقاومة الموحدة:<br />
+الان يجب ان يبدأ العقاب القاسي للكيان الصهيوني يجب مواصلة دك الكيان والتركيز من جميع جبهات المقاومة على رأس الكيان لتحطيمه وقف اطلاق النار والمفاوضات لا تشمل الكيان الصهيوني ولا يجب ان تشمله فالحرب مع الصهاينة حرب مفتوحة لا مجال لايقافها فلا تخطئوا اخطاء الماضي إن الله معكم ولقد فتح الطريق لكم واراكم نوره فاستمروا.<br />
+صحيفة “إسرائيل اليوم” تدعي نقلا عن مصدر في البيت الأبيض أن إسرائيل وافقت على وقف إطلاق النار مع إيران.<br />
+ايران لم ولن تُجري مفاوضات مع الكيان الصهيوني وأن المفاوضات الجارية لا تشمل الكيان الصهيوني بما يعني ان ايران في حِلٍ من اي اتفاق يجري مع الامريكان يشمل الصهاينة والكيان الصهيوني فما يبتغيه الصهاينة هو استغلال هذه الفرصة للانقضاض على لبنان وحزب الله اذا توقفت ايران عن دك الصهاينة بالصواريخ والاستفراد به في غضون مدة الهدنة او المفاوضات او وقف العمليات العسكرية في ايران لتثبيت امر واقع على الارض اللبنانية وفي غزة وفي الضفة.<br />
+نهيب بأخوتنا في ايران وفي اليمن وفي العراق مواصلة دك الكيان بالصواريخ وعدم اعطاءه الفرصة ومشاغلته قدر الامكان ودعم اخوتنا في حزب الله مع ضرورة مراقبة قوات ابو محمد الغولاني الإرهابية في سوريا من الغدر بحزب الله.<br />
+الان وخلال فترة وقف النار يجب التركيز على المناطق المشتعلة كجنوب لبنان وغزة ومراقبة الحدود السورية اللبنانية والحدود الاردنية لكي لا يتم الغدر بحزب الله واخوتنا في غزة.<br />
+اتفاق على المفاوضات او مهلة لوقف اطلاق النار لا تشمل الصهاينة ابداً فما زالت المعارك مستمرة ويجب ان تبقى مستمرة لعدم اعطاء الكيان الصهيوني المجال لاخذ نفس او استراحة لاعادة ترتيب قوته وخططه لحزب الله والجنوب.<br />
+انها الفرصة المواتية فلا تتوقفوا استمروا فيما انت تفعلون وزيدوا القوة والضربات الساحقة لقلب الكيان.<br />
+“قَاتِلُوهُمْ يُعَذِّبْهُمُ اللَّهُ بِأَيْدِيكُمْ وَيُخْزِهِمْ وَيَنصُرْكُمْ عَلَيْهِمْ وَيَشْفِ صُدُورَ قَوْمٍ مُّؤْمِنِينَ” <br />
+صدق الله العظيم</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064116">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064108">
+			<article>
+	            <footer>
+                                        <cite>ابراهيم الدمشقي</cite>
+
+                    <a class="comment-link" href="#comment-3064108">
+                        <time pubdate="1775756447">Yesterday at 5:40 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>حلفت يمين اني ماعاد علق بهذه الصحيفة الموقرة، ولكن صوم ٣ ايام كفارة اليمين افضل من ان تصيبني الجلطة على هل اخبار يلي بتسم البدن.  يجب على كل العالم ان يعرف بان اميركا ليست بحاجة الى حلفاء، ولكن هي بحاجة الى كلاب تنبح بجانبها على اي شخص يتطاول عليها او على اسراىيل، وقد وجدت ضالتها في الامة العربية والامة الاسلامية السنية فهم اوفى انواع الكلاب. اما بالنسبة لايران فهي مع الاسف وقعت بالفخ وللمرة الثانية او الثالثة. الاسبوعان كافيان لملء صواريخ الدفاع والهجوم بالمخازن الامريكية والاسراىيلة التى اصبحت شبه خاوية والدليل معدل الاصابات باخر ٣ او ٤ ايام من الحرب اكبر بكثير من اول ٣٥ او ٣٦ يوم من الحرب. ثانيا: انفراد اسرائيل بلبنان وتنفيذ مجازر هاىلة وطز بكل الاتفاقيات لان الكلاب جاهزة للنباج (تصريح شيخ الازهر الموقر). ثالثا: قلنا ببداية الحرب بان على ايران قفل خطوط الهاتف عن كل المسؤولين لعدم ازعاجهم بنباح الكلاب من الامة الاسلامية السنية لان مع الاسف الخازوق لا يأتي الا من الدول السنية. رابعا: دم الشهداء الايرانيين لا يمكن التفاوض عليه والا اصبحت ايران دولة شبه سنية وهي ببداية طريق الانهيار.</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064108">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064104">
+			<article>
+	            <footer>
+                                        <cite>taboukar</cite>
+
+                    <a class="comment-link" href="#comment-3064104">
+                        <time pubdate="1775755799">Yesterday at 5:29 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>عجلة التاريخ لن تعود إلى الوراء<br />
+إلى جماعة العصر الحجري<br />
+و كذلك إلى  &#8230;.<br />
+جماعة عنترة بن شداد<br />
+و شيغيفارة<br />
+و مصارع طواحين الريح دانكي<br />
+و جماعة المفاوضات<br />
+و دبلوماسية كوعية _ بوعية<br />
+و &#8230; الخ<br />
+الازمة  ، أزمة عصر سامج دق<br />
+جرسه</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064104">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064097">
+			<article>
+	            <footer>
+                                        <cite>أبو محمد</cite>
+
+                    <a class="comment-link" href="#comment-3064097">
+                        <time pubdate="1775753792">Yesterday at 4:56 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>أستاذ عبد الباري، أن يلج الجمل في سم الخياط أهون من أن يتخذ رئيسا الجمهورية والحكومة في لبنان، ومن ورائهما الزعماء العرب، موقفا رجوليا في وجه الصهاينة، فضلا عن الوقوف في وجه أمريكا.</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064097">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064090">
+			<article>
+	            <footer>
+                                        <cite>Anonymous</cite>
+
+                    <a class="comment-link" href="#comment-3064090">
+                        <time pubdate="1775753196">Yesterday at 4:46 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>IT IS POSSIBLE IRAN TO GO TO PAKISTAN MEETING BUT AT SAME TIME TO STRIKE ISRAEL WHO BREACHED CEASE FIRE &amp; THEY ARE RESPONSIBLE IN FRONT OR WORLD  ..THIS IS IRAN RIGHT .</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064090">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064089">
+			<article>
+	            <footer>
+                                        <cite>taboukar</cite>
+
+                    <a class="comment-link" href="#comment-3064089">
+                        <time pubdate="1775752949">Yesterday at 4:42 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>شرق أوسط منزوع من كل اسباب الحرب ،<br />
+ ليختفي كل هذا السوق الجيو _ غاشي &#8230;<br />
+و لماذا لا يستمعون لأصوات الشعوب التي<br />
+بالتي &#8230;</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064089">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064084">
+			<article>
+	            <footer>
+                                        <cite>مفهومة</cite>
+
+                    <a class="comment-link" href="#comment-3064084">
+                        <time pubdate="1775752637">Yesterday at 4:37 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>لان النتن لم يظفر بالنووي والصاروخي الإيراني فاقل شيء ممكن يحصله ينهي موضوع حزب الله في لبنان</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064084">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064083">
+			<article>
+	            <footer>
+                                        <cite>الشعب اللبناني العربي</cite>
+
+                    <a class="comment-link" href="#comment-3064083">
+                        <time pubdate="1775752497">Yesterday at 4:34 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>نظام لبنان عليه ان يخجل و يتنحى والا فالعصيان المدني فهو فشل في حماية الشعب اللبناني سنتين .. يا للعار &#8230; تريليون تحية لحزب الله</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064083">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064081">
+			<article>
+	            <footer>
+                                        <cite>ابو حسن 🙇</cite>
+
+                    <a class="comment-link" href="#comment-3064081">
+                        <time pubdate="1775752286">Yesterday at 4:31 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>شوف، الكلام اللي انحكى مش بس صحيح، هذا بعبّر عن وجع وغضب كل واحد شايف الدم العربي كيف صار رخيص بهاد العالم.<br />
+اللي صار مش “أحداث” عابرة… هاي جريمة واضحة، واللي بصير في لبنان اليوم هو امتداد لنفس العدوان اللي بنشوفه من سنين من إسرائيل بدعم كامل ومفضوح من الولايات المتحدة. يعني ما في داعي نلف وندور… اللعبة مكشوفة.<br />
+وبصراحة؟ اللي بحكي عن “هدنة” بين إيران وأمريكا وكأنها خطوة للسلام، يا إما مش فاهم، يا إما متغاضي. هدنة شكلية، عشان يعطوا مجال لإعادة ترتيب الأوراق، مش عشان يوقفوا الدم. والدليل؟ القصف ما وقف، والمجازر مستمرة.<br />
+أما موضوع إنه بنيامين نتنياهو هو اللي ماسك القرار… هاي مش مبالغة. الزلمة بتصرف وكأنه فوق الكل، وبفرض واقع بالقوة، والعالم كله بيتفرج. تهديدات، قتل، تدمير… ولا حدا حاسبه.<br />
+وبالنسبة للوسطاء… مع احترامي، بس فعلاً صرنا نحس إنه كثير منهم مجرد واجهة. حكي على الورق، وتصريحات إعلامية، وعلى الأرض ولا إشي بيتغير. الدم هو اللي بحكي.<br />
+بس أهم نقطة: المقاومة مش انتهت، ولا رح تنتهي. كل اللي راهنوا إنها خلصت كانوا عايشين بوهم. اللي بصير اليوم بيثبت إنه في ناس بعدها واقفة، بعدها بترد، بعدها ما انكسرت. وهاي الحقيقة اللي بتخوفهم.<br />
+بالآخر، اللي بصير مش بس سياسة… هاي كرامة أمة كاملة. واللي بدو يفهم، يفهم: الدم ما بصير مي، واللي بينقتلوا اليوم مش أرقام… هدول ناس إلهم حق يعيشوا بكرامة، زي باقي العالم.</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064081">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064074">
+			<article>
+	            <footer>
+                                        <cite>عبد الحق - الجزائر</cite>
+
+                    <a class="comment-link" href="#comment-3064074">
+                        <time pubdate="1775750251">Yesterday at 3:57 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>الحكومة اللبنانية تنفذ الأوامر اتي تأتيها من واشنطن بتواطؤ الحكومات الغربية الداعمة لأسرائيل و الانظمة العربية العميلة لأمريكا و لا تملك فرارها .تريد ان تجعل من لبنان سوريا ثانية تأخذ اسرائيل ماتشاء من اراضيها و اجوائها و مياهها و  تفجر حربا طائفية بين مكونات الشعب اللبنااني بواسطة عملائها في الداخل مثلما حصل في سوريا.نرجو من الله سبحانه و تعالى حماية ايران و المقاومة اللبنانية و الفلسطينية و العراقية و الحوثيين من كيد  و مكر امريكا و اسرائيل و عملائهم من الحكام العرب الخونة .</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064074">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+        <li class="comment " id="comment-3064072">
+			<article>
+	            <footer>
+                                        <cite>عشيّة جُمعة الخير</cite>
+
+                    <a class="comment-link" href="#comment-3064072">
+                        <time pubdate="1775749931">Yesterday at 3:52 pm</time>
+                    </a>
+                </footer>
+
+                <div class="comment-content">
+                    <p>9 نيسان ربيع انتصار“ثورة القرن” 20م الشعبية الإيرانية 1979م واستفتاء 1980م مولد جمهورية على أرض فارس الحضارة وفي الجوار انفراد تسلّط البدويّ الغابر في 9 نيسان 2003م (الفار «صدّام» وبُداة مضارب خليج بني خيبان) وشّن الحرب عليها مع نظيره في الحماقة والنرجسيّة الأرعن «ترمب» ربيب تلّ أبيب . مَجَلَّة “العربي” الكويتيّة الرائدة، ربيع 1 عام 1980م توجست أزمة “مضيق هرمز” تكون على غرار غزوة خليج الخنازير Bay of Pigs Invasion الأميركيّة الفاشلة في 17 نيسان 1961م في خاصرة كوبا الرخوة.<br />
+اليهودي المُؤيد لفلسطين جدعون ليفي يرى علاقة نزوة سامة عبثيّة عدميّة وضعت أوزارها عشية جُمعة الخير، في عنوانه وانقر على التعليقات أدناه :</p>
+<p>نتنياهو أمر بالحرب لكن المعارضة سوّقتها. الآن ستدفع إسرائيل الثمن</p>
+                </div>
+
+	            <div class="comment-meta" id="comment-3064072">
+                                    </div>
+            </article>
+    </li><!-- #comment-## -->
+                </ol>
+                <div class="comment-pagination">
+                                                        </div>
+
+            			<span style="float:right;direction:rtl;text-align:right;font-family:times; font-size:15px; font-weight:bold;color:red;">شروط التعليق: <br></span>
+								<span style="float:right;direction:rtl;text-align:right;font-family:times; font-size:15px; font-weight:bold;">
+التزام زوار "راي اليوم" بلياقات التفاعل مع المواد المنشورة ومواضيعها المطروحة، وعدم تناول الشخصيات والمقامات الدينية والدنيوية والكتّاب، بكلام جارح ونابِ ومشين، وعدم المساس بالشعوب والأعراق والإثنيات والأوطان بالسوء، وعلى ان يكون التعليق مختصرا بقدر الامكان. وان لا يزيد التعليق عن 100 كلمة، والا سنعتذر عن عدم النشر.
+							</span>
+									<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">اضافة تعليق</h3><form action="https://www.raialyoum.com/wp-comments-post.php" method="post" id="commentform" class="comment-form"><div class="clearfix"></div>
+				<div class="comment-form-input-wrap td-form-comment">
+					<textarea placeholder="التعليق:" id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
+					<div class="td-warning-comment">Please enter your comment!</div>
+				</div>
+		        <div class="comment-form-input-wrap td-form-author">
+			            <input class="" id="author" name="author" placeholder="اسم:" type="text" value="" size="30"  />
+			            <div class="td-warning-author">Please enter your name here</div>
+			         </div>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="ارسال التعليق" /> <input type='hidden' name='comment_post_ID' value='2070746' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p></form>	</div><!-- #respond -->
+	    </div> <!-- /.content -->
+                            </div>
+                        </div>
+		                <div class="td-pb-span4 td-main-sidebar" role="complementary">
+			                <div class="td-ss-main-sidebar">
+				                <aside class="td_block_template_1 widget widget_search"><form method="get" class="td-search-form-widget" action="https://www.raialyoum.com/">
+    <div role="search">
+        <input class="td-widget-search-input" type="text" value="" name="s" id="s" /><input class="wpb_button wpb_btn-inverse btn" type="submit" id="searchsubmit" value="بحث" />
+    </div>
+</form></aside><aside class="widget_text td_block_template_1 widget widget_custom_html"><div class="textwidget custom-html-widget"><ul id="" class="cnss-social-icon " style="text-align:center;"><li class="cn-fa-facebook" style="display:inline-block;"><a class="" target="_blank" href="https://www.facebook.com/raialyoum4/" title="Facebook" style=""><img src="https://www.raialyoum.com/wp-content/uploads/2019/05/facebook.png" border="0" width="32" height="32" alt="Facebook" title="Facebook" style="margin:5px;" /></a></li><li class="cn-fa-twitter" style="display:inline-block;"><a class="" target="_blank" href="https://twitter.com/raialyoum1" title="Twitter" style=""><img src="https://www.raialyoum.com/wp-content/uploads/2019/05/twitter.png" border="0" width="32" height="32" alt="Twitter" title="Twitter" style="margin:5px;" /></a></li><li class="cn-fa-linkedin" style="display:inline-block;"><a class="" target="_blank" href="https://www.linkedin.com/in/rai-alyoum-06322b194/" title="LinkedIn" style=""><img src="https://www.raialyoum.com/wp-content/uploads/2019/05/linkedin.jpg" border="0" width="32" height="32" alt="LinkedIn" title="LinkedIn" style="margin:5px;" /></a></li><li class="cn-fa-youtube" style="display:inline-block;"><a class="" target="_blank" href="https://www.youtube.com/channel/UCXzZrRGaskVbXv6_tgK0xtQ" title="YouTube" style=""><img src="https://www.raialyoum.com/wp-content/uploads/2019/05/youtube.png" border="0" width="32" height="32" alt="YouTube" title="YouTube" style="margin:5px;" /></a></li><li class="cn-fa-telegram" style="display:inline-block;"><a class="" target="_blank" href="https://t.me/raialyoumnews" title="Telegram" style=""><img src="https://www.raialyoum.com/wp-content/uploads/2019/11/telegram.png" border="0" width="32" height="32" alt="Telegram" title="Telegram" style="margin:5px;" /></a></li><li class="cn-fa-android" style="display:inline-block;"><a class="" target="_blank" href="https://play.google.com/store/apps/details?id=app.raialyoum.com" title="Android" style=""><img src="https://www.raialyoum.com/wp-content/uploads/2022/02/2022-02-25_08-53-07_537532.jpg" border="0" width="32" height="32" alt="Android" title="Android" style="margin:5px;" /></a></li></ul></div></aside><aside class="td_block_template_1 widget widget_text">			<div class="textwidget"><p><center>الاعلانات</center></p>
+</div>
+		</aside><aside class="td_block_template_1 widget raial-widget"><!-- 71161633/home_right_side/home_right_side -->
+<div data-fuse="22108266438"></div></aside><aside class="td_block_template_1 widget raial-widget"><!-- /217464089/RY_MPU_left_1 -->
+<div id='div-gpt-ad-1526443718830-0' style='min-width: 200px; min-height: 250px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1526443718830-0'); });
+  </script>
+</div></aside><aside class="td_block_template_1 widget raial-widget"><!-- /217464089/MPU_left_2-->
+<div id='div-gpt-ad-1526443718830-1' style='min-width: 300px; min-height: 250px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1526443718830-1'); });
+  </script>
+</div></aside><aside class="td_block_template_1 widget raial-widget"><!-- /217464089/RY_MPU_left3-->
+<div id='div-gpt-ad-1526443718830-2' style='min-width: 300px; min-height: 250px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1526443718830-2'); });
+  </script>
+</div></aside>			                </div>
+		                </div>
+                    			
+			
+			
+
+		
+		
+		
+		
+		
+		
+        </div> <!-- /.td-pb-row -->
+		
+		
+
+		
+		
+		
+		
+		
+		
+    </div> <!-- /.td-container -->
+</div> <!-- /.td-main-content-wrap -->
+
+
+
+<!-- Instagram -->
+
+
+
+<!-- Footer -->
+
+
+<!-- Sub Footer -->
+</div><!--close td-outer-wrap-->
+
+
+
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/Newspaper\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+
+	<!-- ShiftNav Main Toggle -->
+		<div id="shiftnav-toggle-main" class="shiftnav-toggle-main-align-center shiftnav-toggle-style-full_bar shiftnav-togglebar-gap-auto shiftnav-toggle-edge-left shiftnav-toggle-icon-x"   ><button id="shiftnav-toggle-main-button" class="shiftnav-toggle shiftnav-toggle-shiftnav-main shiftnav-toggle-burger" tabindex="1" data-shiftnav-target="shiftnav-main" aria-label="Toggle Menu"><i class="fa fa-bars"></i></button>	<div class="shiftnav-main-toggle-content shiftnav-toggle-main-block"><a href="https://www.raialyoum.com">رأي اليوم</a></div></div>	
+	<!-- /#shiftnav-toggle-main -->
+
+	
+
+
+	<!-- ShiftNav #shiftnav-main -->
+	<div class="shiftnav shiftnav-nojs shiftnav-shiftnav-main shiftnav-left-edge shiftnav-skin-standard-dark shiftnav-transition-standard" id="shiftnav-main" data-shiftnav-id="shiftnav-main">
+		<div class="shiftnav-inner">
+
+		
+			<h3 class="shiftnav-menu-title shiftnav-site-title"><a href="https://www.raialyoum.com">رأي اليوم</a></h3>
+	<nav class="shiftnav-nav"><ul id="menu-mobile" class="shiftnav-menu shiftnav-targets-default shiftnav-targets-text-default shiftnav-targets-icon-default"><li id="menu-item-1230859" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-first td-menu-item td-normal-menu menu-item-1230859 shiftnav-depth-0"><a class="shiftnav-target"  href="/index.php/mobile">مدخل</a></li><li id="menu-item-1230881" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent td-menu-item td-normal-menu menu-item-1230881 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/%d8%b9%d8%a8%d8%af-%d8%a7%d9%84%d8%a8%d8%a7%d8%b1%d9%8a-%d8%b9%d8%b7%d9%88%d8%a7%d9%86/">كلمة رئيس التحرير</a></li><li id="menu-item-1230866" class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1230866 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/%d8%a3%d8%ae%d8%a8%d8%a7%d8%b1-%d8%ae%d8%a7%d8%b5%d8%a9/">أخبار خاصة</a></li><li id="menu-item-55" class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-55 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/%d8%a3%d8%ad%d8%af%d8%ab-%d8%a7%d9%84%d8%a3%d8%ae%d8%a8%d8%a7%d8%b1/">اخر الاخبار</a></li><li id="menu-item-1230871" class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1230871 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/%d8%aa%d8%ad%d9%82%d9%8a%d9%82%d8%a7%d8%aa-%d9%88%d9%85%d9%82%d8%a7%d8%a8%d9%84%d8%a7%d8%aa-%d8%ae%d8%a7%d8%b5%d8%a9/">تحقيقات و دراسات</a></li><li id="menu-item-1230876" class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1230876 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/%d8%ad%d9%88%d8%a7%d8%b1-%d9%85%d9%81%d8%aa%d9%88%d8%ad/">حوار مفتوح</a></li><li id="menu-item-1230877" class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1230877 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/%d8%b1%d9%8a%d8%a7%d8%b6%d8%a9/">رياضة</a></li><li id="menu-item-1230883" class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1230883 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/%d8%ba%d8%b0%d8%a7%d8%a1-%d9%88%d8%af%d9%88%d8%a7%d8%a1/">غذاء ودواء</a></li><li id="menu-item-1649053" class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1649053 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/%d8%b5%d8%ad%d8%a9-%d9%88%d8%ac%d9%85%d8%a7%d9%84/">صحة وجمال</a></li><li id="menu-item-1230890" class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1230890 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/%d9%85%d8%ae%d8%aa%d8%b5%d8%b1-%d9%85%d9%81%d9%8a%d8%af/">مختصر مفيد</a></li><li id="menu-item-1230887" class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1230887 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/%d9%83%d8%aa%d8%a7%d8%a8-%d9%88-%d8%a7%d8%b1%d8%a7%d8%a1/">كتاب و آراء</a></li><li id="menu-item-1230880" class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1230880 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/%d8%b5%d8%ad%d9%81-%d8%b9%d8%b1%d8%a8%d9%8a%d8%a9-%d9%88%d8%b9%d8%a7%d9%84%d9%85%d9%8a%d8%a9/">صحف</a></li><li id="menu-item-1230869" class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1230869 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/%d8%a7%d9%82%d8%aa%d8%b5%d8%a7%d8%af/">اقتصاد</a></li><li id="menu-item-1649052" class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1649052 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/%d8%b3%d9%8a%d8%a7%d8%ad%d8%a9/">سياحة</a></li><li id="menu-item-1230870" class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1230870 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/%d8%a7%d9%87%d9%84-%d9%88-%d8%a7%d9%84%d9%81%d9%86/">اهل و الفن</a></li><li id="menu-item-1230882" class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1230882 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/%d8%b9%d8%b7%d9%88%d8%a7%d9%86-%d9%8a%d9%88%d8%aa%d9%8a%d9%88%d8%a8/">عطوان فيديو</a></li><li id="menu-item-1230875" class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1230875 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/%d8%ab%d9%82%d8%a7%d9%81%d8%a9/">ثقافة</a></li><li id="menu-item-1230891" class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1230891 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/%d9%85%d9%86-%d9%86%d8%ad%d9%86/">من نحن</a></li><li id="menu-item-1230862" class="menu-item menu-item-type-custom menu-item-object-custom td-menu-item td-normal-menu menu-item-1230862 shiftnav-depth-0"><a class="shiftnav-target"  href="/?page_id=131">الاتصال بنا</a></li><li id="menu-item-1230865" class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-1230865 shiftnav-depth-0"><a class="shiftnav-target"  href="https://www.raialyoum.com/category/english/">English</a></li></ul></nav>
+		<button class="shiftnav-sr-close shiftnav-sr-only shiftnav-sr-only-focusable">
+			&times; Close Panel		</button>
+
+		</div><!-- /.shiftnav-inner -->
+	</div><!-- /.shiftnav #shiftnav-main -->
+
+
+	
+        <!-- wpsolr - ajax auto completion nonce -->
+        <input type="hidden" id="wpsolr_autocomplete_nonce"
+               value="b34e0a6eb9">
+
+		
+
+    <!--
+
+        Theme: Newspaper by tagDiv 2016
+        Version: 7.7 (rara)
+        Deploy mode: deploy
+        
+        uid: 69d8f798bd283
+    -->
+
+    <script type="text/javascript" src="https://www.raialyoum.com/wp-includes/js/jquery/ui/core.min.js?ver=1.13.3" id="jquery-ui-core-js"></script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-includes/js/jquery/ui/mouse.min.js?ver=1.13.3" id="jquery-ui-mouse-js"></script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-includes/js/jquery/ui/sortable.min.js?ver=1.13.3" id="jquery-ui-sortable-js"></script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-content/plugins/post-views-counter-pro/js/crawler-detect.min.js?ver=1.6.2" id="post-views-counter-pro-crawler-detect-js"></script>
+<script type="text/javascript" id="post-views-counter-pro-frontend-js-before">
+/* <![CDATA[ */
+var pvcpArgsFrontend = {"mode":"js","content":{"type":"post","subtype":"post","data":2070746},"contentActive":true,"requestURL":"https:\/\/www.raialyoum.com\/wp-admin\/admin-ajax.php","nonce":"231f8983ca","dataStorage":"cookies","blockAI":true,"blockBots":false,"multisite":false,"path":"\/","domain":"","adminAjax":"https:\/\/www.raialyoum.com\/wp-admin\/admin-ajax.php","nonceCount":"e5455d352e"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-content/plugins/post-views-counter-pro/js/frontend.min.js?ver=1.6.2" id="post-views-counter-pro-frontend-js"></script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-content/plugins/carousel-horizontal-posts-content-slider/assets/js/caroufredsel/jquery.transit.min.js?ver=3.3" id="wa_chpcs_transit-js"></script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-content/plugins/carousel-horizontal-posts-content-slider/assets/js/caroufredsel/jquery.lazyload.min.js?ver=3.3" id="wa_chpcs_lazyload-js"></script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-content/plugins/carousel-horizontal-posts-content-slider/assets/js/caroufredsel/jquery.carouFredSel-6.2.1-packed.js?ver=3.3" id="wa_chpcs_caroufredsel_script-js"></script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-content/plugins/carousel-horizontal-posts-content-slider/assets/js/caroufredsel/jquery.touchSwipe.min.js?ver=3.3" id="wa_chpcs_touch_script-js"></script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-content/plugins/honeypot/includes/js/wpa.js?ver=2.0.1" id="wpascript-js"></script>
+<script type="text/javascript" id="wpascript-js-after">
+/* <![CDATA[ */
+wpa_field_info = {"wpa_field_name":"wjhwbz6798","wpa_field_value":679510,"wpa_add_test":"no"}
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-content/plugins/wp-armour-extended/includes/js/wpae.js?ver=1.32" id="wpaescript-js"></script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-content/plugins/wpsolr-search-engine/wpsolr/core/js/bootstrap-typeahead.js?ver=19.9" id="solr_auto_js1-js"></script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-content/plugins/wpsolr-search-engine/wpsolr/core/bower_components/jsurl/url.min.js?ver=19.9" id="urljs-js"></script>
+<script type="text/javascript" id="autocomplete-js-extra">
+/* <![CDATA[ */
+var wp_localize_script_autocomplete = {"data":{"ajax_url":"https:\/\/www.raialyoum.com\/wp-admin\/admin-ajax.php","is_show_url_parameters":true,"is_ajax":false,"SEARCH_PARAMETER_S":"s","SEARCH_PARAMETER_SEARCH":"search","SEARCH_PARAMETER_Q":"wpsolr_q","SEARCH_PARAMETER_FQ":"wpsolr_fq","SEARCH_PARAMETER_SORT":"wpsolr_sort","SEARCH_PARAMETER_PAGE":"wpsolr_page","SORT_CODE_BY_RELEVANCY_DESC":"sort_by_relevancy_desc","wpsolr_autocomplete_selector":".search-field","wpsolr_autocomplete_action":"wdm_return_solr_rows","wpsolr_autocomplete_nonce_selector":"#wpsolr_autocomplete_nonce","css_ajax_container_page_title":".page-title","css_ajax_container_page_sort":".woocommerce-ordering","css_ajax_container_results":".products,.results-by-facets","css_ajax_container_pagination":"nav.woocommerce-pagination,.paginate_div","css_ajax_container_pagination_page":"a.page-numbers,a.paginate","css_ajax_container_results_count":".woocommerce-result-count,.res_info","ajax_delay_ms":"","redirect_search_home":""}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-content/plugins/wpsolr-search-engine/wpsolr/core/js/autocomplete_solr.js?ver=19.9" id="autocomplete-js"></script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-content/plugins/wpsolr-search-engine/wpsolr/core/js/loadingoverlay/loadingoverlay.min.js?ver=19.9" id="loadingoverlay-js"></script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-content/themes/Newspaper/js/tagdiv_theme.js?ver=7.7" id="td-site-js"></script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-includes/js/comment-reply.min.js?ver=6.8.3" id="comment-reply-js" async="async" data-wp-strategy="async"></script>
+<script type="text/javascript" id="shiftnav-js-extra">
+/* <![CDATA[ */
+var shiftnav_data = {"shift_body":"off","shift_body_wrapper":"","lock_body":"on","lock_body_x":"off","open_current":"off","collapse_accordions":"off","scroll_panel":"on","breakpoint":"960","v":"1.7.1","pro":"0","touch_off_close":"on","scroll_offset":"100","disable_transforms":"off","close_on_target_click":"off","scroll_top_boundary":"50","scroll_tolerance":"10","process_uber_segments":"on"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.raialyoum.com/wp-content/plugins/shiftnav-responsive-mobile-menu/assets/js/shiftnav.min.js?ver=1.7.1" id="shiftnav-js"></script>
+<script type="text/javascript" id="jetpack-stats-js-before">
+/* <![CDATA[ */
+_stq = window._stq || [];
+_stq.push([ "view", JSON.parse("{\"v\":\"ext\",\"blog\":\"205783074\",\"post\":\"2070746\",\"tz\":\"0\",\"srv\":\"www.raialyoum.com\",\"j\":\"1:15.3.1\"}") ]);
+_stq.push([ "clickTrackerInit", "205783074", "2070746" ]);
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://stats.wp.com/e-202615.js" id="jetpack-stats-js" defer="defer" data-wp-strategy="defer"></script>
+<script></script>
+<!-- JS generated by theme -->
+
+<script>
+    
+
+	
+
+		(function(){
+			var html_jquery_obj = jQuery('html');
+
+			if (html_jquery_obj.length && (html_jquery_obj.is('.ie8') || html_jquery_obj.is('.ie9'))) {
+
+				var path = 'https://www.raialyoum.com/wp-content/themes/Newspaper/style.css';
+
+				jQuery.get(path, function(data) {
+
+					var str_split_separator = '#td_css_split_separator';
+					var arr_splits = data.split(str_split_separator);
+					var arr_length = arr_splits.length;
+
+					if (arr_length > 1) {
+
+						var dir_path = 'https://www.raialyoum.com/wp-content/themes/Newspaper';
+						var splited_css = '';
+
+						for (var i = 0; i < arr_length; i++) {
+							if (i > 0) {
+								arr_splits[i] = str_split_separator + ' ' + arr_splits[i];
+							}
+							//jQuery('head').append('<style>' + arr_splits[i] + '</style>');
+
+							var formated_str = arr_splits[i].replace(/\surl\(\'(?!data\:)/gi, function regex_function(str) {
+								return ' url(\'' + dir_path + '/' + str.replace(/url\(\'/gi, '').replace(/^\s+|\s+$/gm,'');
+							});
+
+							splited_css += "<style>" + formated_str + "</style>";
+						}
+
+						var td_theme_css = jQuery('link#td-theme-css');
+
+						if (td_theme_css.length) {
+							td_theme_css.after(splited_css);
+						}
+					}
+				});
+			}
+		})();
+
+	
+	
+</script>
+
+
+
+<!--- UNDERDOGMEDIA EDGE_raialyoum.com JavaScript ADCODE START--->
+
+<script data-cfasync="false" language="javascript" async src="https://udmserve.net/udm/img.fetch?sid=13664;tid=1;dt=6;"></script>
+
+<!--- UNDERDOGMEDIA EDGE_raialyoum.com JavaScript ADCODE END--->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49044338-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-49044338-1');
+</script>
+
+
+<!-- adeqmedia Header Tags-->
+<script type="text/javascript">
+window._taboola = window._taboola || [];
+_taboola.push({flush: true});
+</script>
+
+<!--End of adeqmedia Header Tags-->
+
 </body>
-</html>
+</html><!-- WP Fastest Cache file was created in 0.133 seconds, on April 10, 2026 @ 1:14 pm --><!-- via php -->
